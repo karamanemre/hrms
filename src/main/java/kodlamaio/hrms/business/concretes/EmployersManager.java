@@ -45,12 +45,10 @@ public class EmployersManager implements EmployersService{
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}
 		
-
-		for (Users iterator : this.userDao.findAll()) {
-			if (iterator.getEmail().equals(employers.getEmail())) {
-				return new ErrorResult("Email zaten kullanılıyor");
-			}
+		if (this.userDao.existsByEmail(employers.getEmail())) {
+			return new ErrorResult("Email zaten kullanılıyor");
 		}
+
 		
 		if (employers.getPassword().equals(employers.getPassword_repeat())==false) {
 			return new ErrorResult("Şifreler Uyuşmuyor");

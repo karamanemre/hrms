@@ -20,7 +20,7 @@ public class MernisServiceAdapter implements CustomerCheckService{
 		
 		boolean result=true;
 		try {
-			result = client.TCKimlikNoDogrula(Long.parseLong(candidate.getNational_id()), candidate.getFirstName().toUpperCase(), candidate.getLastName().toUpperCase(),2001);
+			result = client.TCKimlikNoDogrula(Long.parseLong(candidate.getNationalId()), candidate.getFirstName().toUpperCase(), candidate.getLastName().toUpperCase(),2001);
 			if (result==true) {
 				return result;
 			}

@@ -6,5 +6,7 @@ import kodlamaio.hrms.entities.concretes.Users;
 
 public interface UserDao extends JpaRepository<Users, Integer>{
 	
+	boolean existsByEmail(String mail);
+	
 	
 }

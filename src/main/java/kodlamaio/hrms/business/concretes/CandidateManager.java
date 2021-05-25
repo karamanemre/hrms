@@ -46,25 +46,22 @@ public class CandidateManager implements CandidateService{
 				candidate.getLastName().equals("")||
 				candidate.getPassword().equals("")||
 				candidate.getDateOfBirth().equals("")||
-				candidate.getNational_id().equals("")||
+				candidate.getNationalId().equals("")||
 				candidate.getEmail().equals("")
 				) {
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}
 		
-		for (Users iterator : this.userDao.findAll()) {
-			if (iterator.getEmail().equals(candidate.getEmail())) {
-				return new ErrorResult("Email zaten kullanılıyor");
-			}
+		if (userDao.existsByEmail(candidate.getEmail())) {
+			return new ErrorResult("Email zaten mevcut");
 		}
 		
-		for (Candidate iterator : this.candidateDao.findAll()) {
-			if (iterator.getNational_id().equals(candidate.getNational_id())) {
-				return new ErrorResult("Tc kimlik numarası zaten kayıtlı");
-			}
+		
+		if (candidateDao.existsByNationalId(candidate.getNationalId())) {
+			return new ErrorResult("Tc kimlik numarası zaten mevcut");
 		}
 		
-		if ((candidate.getNational_id().length() >10  && candidate.getNational_id().length()<12)==false) {
+		if ((candidate.getNationalId().length() >10  && candidate.getNationalId().length()<12)==false) {
 			return new ErrorResult("Tc Kimlik Numarası 11 Haneli Olmalıdır");
 		}
 		

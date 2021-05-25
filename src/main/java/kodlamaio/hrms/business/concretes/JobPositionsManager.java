@@ -32,11 +32,8 @@ public class JobPositionsManager implements JobPositionsService{
 	@Override
 	public Result add(JobPositions jobPositions) {
 		
-		for (JobPositions iterator : this.jobPositionsDao.findAll()) {
-			if (iterator.getPosition_name().equals(jobPositions.getPosition_name())) {
-				return new ErrorResult("Bu iş pozisyonu zaten mevcut");
-			}
-			
+		if (jobPositionsDao.existsByPositionName(jobPositions.getPositionName())) {
+			return new ErrorResult("Bu iş pozisyonu zaten mevcut");
 		}
 		
 		this.jobPositionsDao.save(jobPositions);
@@ -47,12 +44,12 @@ public class JobPositionsManager implements JobPositionsService{
 	@Override
 	public Result delete(JobPositions jobPositions) {
 		for(JobPositions iterator:jobPositionsDao.findAll()) {
-			if (iterator.getPosition_name().equals(jobPositions.getPosition_name())) {
+			if (iterator.getPositionName().equals(jobPositions.getPositionName())) {
 				this.jobPositionsDao.deleteById(iterator.getId());
-				return new SuccessResult(jobPositions.getPosition_name()+" Adlı Pozisyon Bilgisi silindi");
+				return new SuccessResult(jobPositions.getPositionName()+" Adlı Pozisyon Bilgisi silindi");
 			}
 		}
-		return new ErrorResult(jobPositions.getPosition_name()+" Adlı pozisyon bilgisi zaten yok");
+		return new ErrorResult(jobPositions.getPositionName()+" Adlı pozisyon bilgisi zaten yok");
 		
 	}
 
