@@ -5,27 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.*;
+
 import kodlamaio.hrms.business.abstracts.EmployersService;
 import kodlamaio.hrms.core.concretes.DataResult;
 import kodlamaio.hrms.core.concretes.ErrorResult;
 import kodlamaio.hrms.core.concretes.Result;
 import kodlamaio.hrms.core.concretes.SuccessDataResult;
 import kodlamaio.hrms.core.concretes.SuccessResult;
+import kodlamaio.hrms.core.concretes.emailManager.concrete.IsEmailValid;
 import kodlamaio.hrms.dataAccess.abstracts.EmployersDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Employers;
-import kodlamaio.hrms.entities.concretes.Users;
 
 @Service
 public class EmployersManager implements EmployersService{
 	
 	private EmployersDao employersDao;
 	private UserDao userDao;
+	private IsEmailValid isEmailValid;
 	
 	@Autowired
-	public EmployersManager(EmployersDao employersDao,UserDao userDao) {
+	public EmployersManager(EmployersDao employersDao,UserDao userDao,IsEmailValid isEmailValid) {
 		this.employersDao=employersDao;
 		this.userDao=userDao;
+		this.isEmailValid=isEmailValid;
 	}
 	
 	@Override
@@ -33,6 +37,7 @@ public class EmployersManager implements EmployersService{
 		
 		return new SuccessDataResult<List<Employers>>(employersDao.findAll(),"Emloyers Datası Listelendi");
 	}
+	
 
 	@Override
 	public Result add(Employers employers) {
@@ -48,7 +53,10 @@ public class EmployersManager implements EmployersService{
 		if (this.userDao.existsByEmail(employers.getEmail())) {
 			return new ErrorResult("Email zaten kullanılıyor");
 		}
-
+		
+		if (isEmailValid.isEmailValid(employers.getEmail())==false) {
+			return new ErrorResult("Lütfen geçerli bir email giriniz");
+		}
 		
 		if (employers.getPassword().equals(employers.getPassword_repeat())==false) {
 			return new ErrorResult("Şifreler Uyuşmuyor");

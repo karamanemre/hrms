@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import kodlamaio.hrms.core.concretes.MernisServiceAdapter;
 import kodlamaio.hrms.core.concretes.Result;
 import kodlamaio.hrms.core.concretes.SuccessDataResult;
 import kodlamaio.hrms.core.concretes.SuccessResult;
+import kodlamaio.hrms.core.concretes.emailManager.concrete.IsEmailValid;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
@@ -22,15 +24,19 @@ import kodlamaio.hrms.entities.concretes.Users;
 @Service
 public class CandidateManager implements CandidateService{
 	
+	
+	
 	private CandidateDao candidateDao;
 	private UserDao userDao;
 	private CustomerCheckService customerCheckService;
+	private IsEmailValid isEmailValid;
 	
 	@Autowired
-	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService customerCheckService) {
+	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService customerCheckService,IsEmailValid isEmailValid) {
 		this.candidateDao=jobSeekersDao;
 		this.userDao=userDao;
 		this.customerCheckService=customerCheckService;
+		this.isEmailValid=isEmailValid;
 		
 	}
 	
@@ -56,6 +62,9 @@ public class CandidateManager implements CandidateService{
 			return new ErrorResult("Email zaten mevcut");
 		}
 		
+		if (isEmailValid.isEmailValid(candidate.getEmail())==false) {
+			return new ErrorResult("Lütfen geçerli bir email giriniz");
+		}
 		
 		if (candidateDao.existsByNationalId(candidate.getNationalId())) {
 			return new ErrorResult("Tc kimlik numarası zaten mevcut");
