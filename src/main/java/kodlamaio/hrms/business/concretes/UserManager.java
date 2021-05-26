@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
-import kodlamaio.hrms.core.abstracts.CustomerCheckService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.ErrorResult;
-import kodlamaio.hrms.core.concretes.Result;
-import kodlamaio.hrms.core.concretes.SuccessDataResult;
-import kodlamaio.hrms.core.concretes.SuccessResult;
+import kodlamaio.hrms.core.adapters.CustomerCheckService;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
+import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Users;
 import tr.gov.nvi.tckimlik.WS.KPSPublic;

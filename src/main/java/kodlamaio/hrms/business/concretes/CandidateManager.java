@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
-import kodlamaio.hrms.core.abstracts.CustomerCheckService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.ErrorResult;
-import kodlamaio.hrms.core.concretes.MernisServiceAdapter;
-import kodlamaio.hrms.core.concretes.Result;
-import kodlamaio.hrms.core.concretes.SuccessDataResult;
-import kodlamaio.hrms.core.concretes.SuccessResult;
-import kodlamaio.hrms.core.concretes.emailManager.concrete.IsEmailValid;
+import kodlamaio.hrms.core.adapters.CustomerCheckService;
+import kodlamaio.hrms.core.adapters.MernisServiceAdapter;
+import kodlamaio.hrms.core.emails.IsEmailValid;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
+import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
@@ -23,8 +23,6 @@ import kodlamaio.hrms.entities.concretes.Users;
 
 @Service
 public class CandidateManager implements CandidateService{
-	
-	
 	
 	private CandidateDao candidateDao;
 	private UserDao userDao;
@@ -48,12 +46,12 @@ public class CandidateManager implements CandidateService{
 	@Override
 	public Result add(Candidate candidate) {
 			
-		if (candidate.getFirstName().equals("") ||
-				candidate.getLastName().equals("")||
-				candidate.getPassword().equals("")||
-				candidate.getDateOfBirth().equals("")||
-				candidate.getNationalId().equals("")||
-				candidate.getEmail().equals("")
+		if (candidate.getFirstName().isBlank() ||
+				candidate.getLastName().isBlank()||
+				candidate.getPassword().isBlank()||
+				candidate.getDateOfBirth().isBlank()||
+				candidate.getNationalId().isBlank()||
+				candidate.getEmail().isBlank()
 				) {
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}

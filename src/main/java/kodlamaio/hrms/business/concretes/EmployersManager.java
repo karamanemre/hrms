@@ -5,15 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.regex.*;
-
 import kodlamaio.hrms.business.abstracts.EmployersService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.ErrorResult;
-import kodlamaio.hrms.core.concretes.Result;
-import kodlamaio.hrms.core.concretes.SuccessDataResult;
-import kodlamaio.hrms.core.concretes.SuccessResult;
-import kodlamaio.hrms.core.concretes.emailManager.concrete.IsEmailValid;
+import kodlamaio.hrms.core.emails.IsEmailValid;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
+import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployersDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Employers;
@@ -41,11 +39,11 @@ public class EmployersManager implements EmployersService{
 
 	@Override
 	public Result add(Employers employers) {
-		if (employers.getCompanyName().equals("") ||
-				employers.getEmail().equals("")||
-				employers.getPassword().equals("")||
-				employers.getPhoneNumber().equals("")||
-				employers.getWebSite().equals("")
+		if (employers.getCompanyName().isBlank()||
+				employers.getEmail().isBlank()||
+				employers.getPassword().isBlank()||
+				employers.getPhoneNumber().isBlank()||
+				employers.getWebSite().isBlank()
 				) {
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}
@@ -57,6 +55,7 @@ public class EmployersManager implements EmployersService{
 		if (isEmailValid.isEmailValid(employers.getEmail())==false) {
 			return new ErrorResult("Lütfen geçerli bir email giriniz");
 		}
+		
 		
 		if (employers.getPassword().equals(employers.getPassword_repeat())==false) {
 			return new ErrorResult("Şifreler Uyuşmuyor");

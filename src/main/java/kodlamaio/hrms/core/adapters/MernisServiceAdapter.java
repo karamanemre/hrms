@@ -1,9 +1,9 @@
-package kodlamaio.hrms.core.concretes;
+package kodlamaio.hrms.core.adapters;
 
 import java.rmi.RemoteException;
 
 import org.springframework.stereotype.Service;
-import kodlamaio.hrms.core.abstracts.CustomerCheckService;
+
 import kodlamaio.hrms.entities.concretes.Candidate;
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
 import java.time.format.DateTimeFormatter;

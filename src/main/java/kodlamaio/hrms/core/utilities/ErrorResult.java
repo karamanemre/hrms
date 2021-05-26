@@ -1,4 +1,4 @@
-package kodlamaio.hrms.core.concretes;
+package kodlamaio.hrms.core.utilities;
 
 public class ErrorResult extends Result{
 

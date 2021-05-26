@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobPositionsService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.ErrorResult;
-import kodlamaio.hrms.core.concretes.Result;
-import kodlamaio.hrms.core.concretes.SuccessDataResult;
-import kodlamaio.hrms.core.concretes.SuccessResult;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
+import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobPositionsDao;
 import kodlamaio.hrms.entities.concretes.JobPositions;
 

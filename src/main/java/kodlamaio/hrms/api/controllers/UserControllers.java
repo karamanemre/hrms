@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.UserService;
-import kodlamaio.hrms.core.abstracts.CustomerCheckService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.ErrorResult;
-import kodlamaio.hrms.core.concretes.Result;
-import kodlamaio.hrms.core.concretes.SuccessResult;
+import kodlamaio.hrms.core.adapters.CustomerCheckService;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
+import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.entities.concretes.Users;
 
 //@RestController

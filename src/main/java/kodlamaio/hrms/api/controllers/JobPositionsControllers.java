@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobPositionsService;
 import kodlamaio.hrms.business.abstracts.UsersService;
-import kodlamaio.hrms.core.concretes.DataResult;
-import kodlamaio.hrms.core.concretes.Result;
+import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobPositions;
 import kodlamaio.hrms.entities.concretes.Users;
 
