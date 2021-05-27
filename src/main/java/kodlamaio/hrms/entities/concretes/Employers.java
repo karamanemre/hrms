@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper=false)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 public class Employers extends Users{
 	
 	/*@GeneratedValue(strategy = GenerationType.IDENTITY)

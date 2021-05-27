@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployersService;
-import kodlamaio.hrms.core.emails.IsEmailValid;
+import kodlamaio.hrms.core.emails.EmailRules;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
@@ -21,13 +21,13 @@ public class EmployersManager implements EmployersService{
 	
 	private EmployersDao employersDao;
 	private UserDao userDao;
-	private IsEmailValid isEmailValid;
+	private EmailRules emailRules;
 	
 	@Autowired
-	public EmployersManager(EmployersDao employersDao,UserDao userDao,IsEmailValid isEmailValid) {
+	public EmployersManager(EmployersDao employersDao,UserDao userDao,EmailRules emailRules) {
 		this.employersDao=employersDao;
 		this.userDao=userDao;
-		this.isEmailValid=isEmailValid;
+		this.emailRules=emailRules;
 	}
 	
 	@Override
@@ -48,12 +48,18 @@ public class EmployersManager implements EmployersService{
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}
 		
+		
 		if (this.userDao.existsByEmail(employers.getEmail())) {
 			return new ErrorResult("Email zaten kullanılıyor");
 		}
 		
-		if (isEmailValid.isEmailValid(employers.getEmail())==false) {
+		if (emailRules.isEmailValid(employers.getEmail())==false) {
 			return new ErrorResult("Lütfen geçerli bir email giriniz");
+		}
+		
+		String websiteString = employers.getWebSite().split("www.")[1];
+		if (!employers.getEmail().split("@")[0].equals(websiteString.split(".com")[0])) {
+			return new ErrorResult("Lütfen Şirket Web Sitenizin Uzantısına Sahip Bir Mail Adresiyle Kayıt Olun");
 		}
 		
 		

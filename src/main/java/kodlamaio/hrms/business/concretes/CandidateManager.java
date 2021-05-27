@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.adapters.CustomerCheckService;
 import kodlamaio.hrms.core.adapters.MernisServiceAdapter;
-import kodlamaio.hrms.core.emails.IsEmailValid;
+import kodlamaio.hrms.core.emails.EmailRules;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
@@ -26,15 +27,17 @@ public class CandidateManager implements CandidateService{
 	
 	private CandidateDao candidateDao;
 	private UserDao userDao;
-	private CustomerCheckService customerCheckService;
-	private IsEmailValid isEmailValid;
+	private CustomerCheckService<Candidate> customerCheckService;
+	private EmailRules emailRules;
+	private VerifyCodeService verifyCodeService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService customerCheckService,IsEmailValid isEmailValid) {
+	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService<Candidate> customerCheckService,EmailRules emailRules, VerifyCodeService verifyCodeService) {
 		this.candidateDao=jobSeekersDao;
 		this.userDao=userDao;
 		this.customerCheckService=customerCheckService;
-		this.isEmailValid=isEmailValid;
+		this.emailRules=emailRules;
+		this.verifyCodeService=verifyCodeService;
 		
 	}
 	
@@ -48,19 +51,23 @@ public class CandidateManager implements CandidateService{
 			
 		if (candidate.getFirstName().isBlank() ||
 				candidate.getLastName().isBlank()||
-				candidate.getPassword().isBlank()||
+				//candidate.getPassword().isBlank()||
 				candidate.getDateOfBirth().isBlank()||
-				candidate.getNationalId().isBlank()||
-				candidate.getEmail().isBlank()
+				candidate.getNationalId().isBlank()
+				//candidate.getEmail().isBlank()
 				) {
 			return new ErrorResult("Lütfen tüm alanları doldurunuz");
 		}
+		
+		/*if (customerCheckService.mernisControl(candidate)==false) {
+			return new ErrorResult("Mernis Doğrulama Başarısız");
+		}*/
 		
 		if (userDao.existsByEmail(candidate.getEmail())) {
 			return new ErrorResult("Email zaten mevcut");
 		}
 		
-		if (isEmailValid.isEmailValid(candidate.getEmail())==false) {
+		if (emailRules.isEmailValid(candidate.getEmail())==false) {
 			return new ErrorResult("Lütfen geçerli bir email giriniz");
 		}
 		
@@ -76,9 +83,9 @@ public class CandidateManager implements CandidateService{
 			return new ErrorResult("Şifreler Uyuşmuyor");
 		}
 		
-		
-		
 		this.candidateDao.save(candidate);
+		//this.verifyCodeService.createVerifyCode(userDao.getOne(candidate.getUserId()));
+		//this.verifyCodeService.sendMail(candidate.getEmail());
 		return new SuccessResult("Başarıyla Eklendi");
 		
 		

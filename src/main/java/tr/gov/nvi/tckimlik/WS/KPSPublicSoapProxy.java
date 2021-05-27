@@ -1,6 +1,5 @@
 package tr.gov.nvi.tckimlik.WS;
 
-
 public class KPSPublicSoapProxy implements tr.gov.nvi.tckimlik.WS.KPSPublicSoap {
   private String _endpoint = null;
   private tr.gov.nvi.tckimlik.WS.KPSPublicSoap kPSPublicSoap = null;

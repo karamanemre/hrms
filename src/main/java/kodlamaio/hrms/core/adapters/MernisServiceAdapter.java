@@ -6,44 +6,20 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.entities.concretes.Candidate;
 import tr.gov.nvi.tckimlik.WS.KPSPublicSoapProxy;
-import java.time.format.DateTimeFormatter;
 
 @Service
-public class MernisServiceAdapter implements CustomerCheckService{
+public class MernisServiceAdapter implements CustomerCheckService<Candidate>{
 
 	@Override
-	public boolean checkIfRealPerson(Candidate candidate) {
-		
-		KPSPublicSoapProxy client = new KPSPublicSoapProxy();
-		
-		
-		
-		boolean result=true;
+	public boolean mernisControl(Candidate candidate) {
+		KPSPublicSoapProxy kpsPublic = new KPSPublicSoapProxy();
 		try {
-			result = client.TCKimlikNoDogrula(Long.parseLong(candidate.getNationalId()), candidate.getFirstName().toUpperCase(), candidate.getLastName().toUpperCase(),2001);
-			if (result==true) {
-				return result;
-			}
-		} 
-		catch (RemoteException e) {
+			boolean result = kpsPublic.TCKimlikNoDogrula(Long.parseLong(candidate.getNationalId()), candidate.getFirstName().toUpperCase(), candidate.getLastName().toUpperCase(), Integer.parseInt(candidate.getDateOfBirth()));
+			return result;
+		} catch (RemoteException | NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
-		return false;
-		
-		/*boolean result = true;
-		
-		try {
-			
-			result = client.TCKimlikNoDogrula(Long.parseLong(jobSeekers.getIdentity_number()),jobSeekers.getFirstName().toUpperCase()
-					,jobSeekers.getLastName().toUpperCase(), jobSeekers.getDateOfBirth());
-			
-		}
-		catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		
-		return result;*/
+			return false;
 	}
 
 }

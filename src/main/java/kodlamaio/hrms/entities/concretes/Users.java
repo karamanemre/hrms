@@ -10,6 +10,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +30,12 @@ public class Users {
     @Column(name = "id")
     private int userId;
 	
+	
+	//@NotBlank(message="Mail Alanı Boş olamaz")
 	@Column(name = "email")
     private String email;
     
+	//@NotBlank(message="Password Alanı Boş olamaz")
     @Column(name = "password")
     private String password;
     
