@@ -10,11 +10,11 @@ import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.VerifyCode;
 
-@RestController
-@RequestMapping("/valid")
+//@RestController
+//@RequestMapping("/valid")
 public class VerifyCodeController {
 	
-	VerifyCodeService verifyCodeService;
+	/*VerifyCodeService verifyCodeService;
 	
 
 	public VerifyCodeController(VerifyCodeService verifyCodeService) {
@@ -29,5 +29,5 @@ public class VerifyCodeController {
 		return verifyCodeService.verifyUser(verifyCode);
 		
 		
-	}
+	}*/
 }

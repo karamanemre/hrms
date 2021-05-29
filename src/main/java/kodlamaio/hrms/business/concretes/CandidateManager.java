@@ -21,6 +21,7 @@ import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
 import kodlamaio.hrms.entities.concretes.Users;
+import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class CandidateManager implements CandidateService{
@@ -48,16 +49,6 @@ public class CandidateManager implements CandidateService{
 
 	@Override
 	public Result add(Candidate candidate) {
-			
-		if (candidate.getFirstName().isBlank() ||
-				candidate.getLastName().isBlank()||
-				//candidate.getPassword().isBlank()||
-				candidate.getDateOfBirth().isBlank()||
-				candidate.getNationalId().isBlank()
-				//candidate.getEmail().isBlank()
-				) {
-			return new ErrorResult("Lütfen tüm alanları doldurunuz");
-		}
 		
 		/*if (customerCheckService.mernisControl(candidate)==false) {
 			return new ErrorResult("Mernis Doğrulama Başarısız");
@@ -65,10 +56,6 @@ public class CandidateManager implements CandidateService{
 		
 		if (userDao.existsByEmail(candidate.getEmail())) {
 			return new ErrorResult("Email zaten mevcut");
-		}
-		
-		if (emailRules.isEmailValid(candidate.getEmail())==false) {
-			return new ErrorResult("Lütfen geçerli bir email giriniz");
 		}
 		
 		if (candidateDao.existsByNationalId(candidate.getNationalId())) {
@@ -90,6 +77,5 @@ public class CandidateManager implements CandidateService{
 		
 		
 	}
-	
 	
 }

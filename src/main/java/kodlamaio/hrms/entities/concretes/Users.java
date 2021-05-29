@@ -31,11 +31,12 @@ public class Users {
     private int userId;
 	
 	
-	//@NotBlank(message="Mail Alanı Boş olamaz")
+	@NotBlank(message="Mail Alanı Boş olamaz")
 	@Column(name = "email")
+	@Email
     private String email;
     
-	//@NotBlank(message="Password Alanı Boş olamaz")
+	@NotBlank(message="Password Alanı Boş olamaz")
     @Column(name = "password")
     private String password;
     

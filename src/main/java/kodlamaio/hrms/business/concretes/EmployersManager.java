@@ -39,22 +39,9 @@ public class EmployersManager implements EmployersService{
 
 	@Override
 	public Result add(Employers employers) {
-		if (employers.getCompanyName().isBlank()||
-				employers.getEmail().isBlank()||
-				employers.getPassword().isBlank()||
-				employers.getPhoneNumber().isBlank()||
-				employers.getWebSite().isBlank()
-				) {
-			return new ErrorResult("Lütfen tüm alanları doldurunuz");
-		}
-		
 		
 		if (this.userDao.existsByEmail(employers.getEmail())) {
 			return new ErrorResult("Email zaten kullanılıyor");
-		}
-		
-		if (emailRules.isEmailValid(employers.getEmail())==false) {
-			return new ErrorResult("Lütfen geçerli bir email giriniz");
 		}
 		
 		String websiteString = employers.getWebSite().split("www.")[1];

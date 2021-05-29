@@ -9,6 +9,7 @@ import kodlamaio.hrms.core.utilities.Result;
 public interface JobPositionsService {
 	 
 	DataResult<List<JobPositions>> getAll();
+	DataResult<JobPositions> findByPositionName(String name);
     Result add(JobPositions jobPositions);
     Result delete(JobPositions jobPositions);
 

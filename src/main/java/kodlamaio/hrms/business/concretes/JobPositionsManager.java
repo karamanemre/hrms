@@ -20,8 +20,8 @@ public class JobPositionsManager implements JobPositionsService{
 	private JobPositionsDao jobPositionsDao;
 	
 	@Autowired
-	public JobPositionsManager(JobPositionsDao userDao) {
-		this.jobPositionsDao = userDao;
+	public JobPositionsManager(JobPositionsDao jobPositionsDao) {
+		this.jobPositionsDao = jobPositionsDao;
 	}
 
 	@Override
@@ -52,6 +52,12 @@ public class JobPositionsManager implements JobPositionsService{
 		return new ErrorResult(jobPositions.getPositionName()+" Adlı pozisyon bilgisi zaten yok");
 		
 	}
+
+	@Override
+	public DataResult<JobPositions> findByPositionName(String name) {
+		 return new SuccessDataResult<>(this.jobPositionsDao.findByPositionName(name));
+	}
+
 
 	
 }

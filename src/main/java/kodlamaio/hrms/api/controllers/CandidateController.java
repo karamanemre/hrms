@@ -35,7 +35,12 @@ public class CandidateController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Candidate candidate) {
+	public Result add(@Valid @RequestBody Candidate candidate) {
 		return this.candidateService.add(candidate);
 	}
+	
+	/*@GetMapping()
+	public DataResult<Candidate> getByFirstNameAndLastName(String firstName,String lastName){
+		return this.candidateService.getByFirstNameAndLastName(firstName,lastName);
+	}*/
 }
