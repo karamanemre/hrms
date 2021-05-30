@@ -14,6 +14,8 @@ public interface JobPostingService {
 	DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline();
 	DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool,int id);
 	
+	Result toggleActiveStatus(int id);
+	
 	
 	
 }

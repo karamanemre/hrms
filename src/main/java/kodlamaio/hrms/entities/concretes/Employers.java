@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -35,6 +36,7 @@ public class Employers extends Users{
     private String webSite;
 	
 	@NotBlank(message = "Telefon Numarası Alanı Boş Olamaz")
+	@Pattern(regexp ="[0-9\\s]{12}",message = "Hatalı Telefon numarası")
     @Column(name = "phone_number")
     private String phoneNumber;
     

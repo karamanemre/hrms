@@ -27,6 +27,7 @@ public class JobPostings {
 	@Column(name = "id")
 	private int id;
 	
+	
 	@NotBlank(message = "Açıklama Alanı Boş Bırakılamaz")
 	@Column(name = "description")
 	private String description;
@@ -47,7 +48,6 @@ public class JobPostings {
 	@Column(name = "application_deadline")
 	private String applicaitonDeadline;
 	
-	@NotBlank(message = "İlanın (Aktif-Pasif) Olup olmadığını Belirtin Lütfen")
 	@Column(name = "is_active")
 	private boolean isActive;
 	

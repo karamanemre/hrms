@@ -69,6 +69,15 @@ public class JobPostingManager implements JobPostingService{
 		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsActiveAndEmployer(bool, id),"Data Listelendi");
 	}
 
+	@Override
+	public Result toggleActiveStatus(int id) {
+		 JobPostings jobPostingToChange = this.jobPostingDao.findById(id).get();
+	     jobPostingToChange.setActive(!jobPostingToChange.isActive());
+	     this.jobPostingDao.save(jobPostingToChange);
+	     return new SuccessResult("Başarılı!");
+	     
+	}
+
 
 
 

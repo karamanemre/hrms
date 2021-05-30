@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern.Flag;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,6 +40,7 @@ public class Users {
 	@Email
     private String email;
     
+	@Pattern(regexp = "^(?=.*\\d).{4,8}$", flags = Flag.UNICODE_CASE,message = "Şifreniz küçük harf,büyük harf,sembol ve rakam içermelidir")
 	@NotBlank(message="Password Alanı Boş olamaz")
     @Column(name = "password")
     private String password;

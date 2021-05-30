@@ -66,6 +66,12 @@ public class JobPostingController {
     }
 	
 	
+	@GetMapping("/toggleActiveStatus")
+	public Result toggleActiveStatus(int id) {
+       return this.jobPostingService.toggleActiveStatus(id);
+    }
+	
+	
 	
 	
 	

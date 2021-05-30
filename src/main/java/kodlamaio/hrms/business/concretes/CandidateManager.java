@@ -2,15 +2,11 @@ package kodlamaio.hrms.business.concretes;
 
 
 import java.util.List;
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.adapters.CustomerCheckService;
-import kodlamaio.hrms.core.adapters.MernisServiceAdapter;
 import kodlamaio.hrms.core.emails.EmailRules;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
@@ -20,8 +16,6 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.entities.concretes.Users;
-import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class CandidateManager implements CandidateService{

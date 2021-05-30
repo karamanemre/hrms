@@ -13,8 +13,10 @@ public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	
 	 List<JobPostings> findAllByIsActive(boolean jobPosting);
 	 List<JobPostings> findAllByIsActiveTrueOrderByApplicaitonDeadline();
-	 
 	 @Query("From JobPostings where isActive=:bool and employer_id=:id")
 	 List<JobPostings> getByIsActiveAndEmployer(boolean bool,int id);
+	 
+	 @Query("From JobPostings where employer_id=:employerId") // Aktiflik durumunu değiştirmek için
+	 JobPostings getByEmployer(int employerId);
 	 
 }
