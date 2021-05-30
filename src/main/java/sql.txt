@@ -3,15 +3,6 @@
 BEGIN;
 
 
-CREATE TABLE public.candidate_activations
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 32648954 CACHE 1 ),
-    user_id integer NOT NULL,
-    email_verified character varying NOT NULL,
-    activation_status boolean NOT NULL,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE public.candidates
 (
     user_id integer NOT NULL,
@@ -22,14 +13,10 @@ CREATE TABLE public.candidates
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE public.employer_activations
+CREATE TABLE public.city
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3298564 CACHE 1 ),
-    user_id integer NOT NULL,
-    activation_status boolean NOT NULL,
-    activation_date date NOT NULL,
-    activation_email character varying NOT NULL,
-    is_verified_employee boolean NOT NULL,
+    id integer NOT NULL,
+    city_name character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -50,6 +37,21 @@ CREATE TABLE public.employess
     PRIMARY KEY (user_id)
 );
 
+CREATE TABLE public.job_postings
+(
+    id integer NOT NULL,
+    employer_id integer NOT NULL,
+    job_position_id integer NOT NULL,
+    description text NOT NULL,
+    city_id integer NOT NULL,
+    number_of_open_positions character varying NOT NULL,
+    application_deadline character varying NOT NULL,
+    is_active boolean NOT NULL,
+    min_salary double precision,
+    max_salary double precision,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.positions
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3854567 CACHE 1 ),
@@ -62,12 +64,13 @@ CREATE TABLE public.users
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 32654896 CACHE 1 ),
     email character varying(50) NOT NULL,
     password character varying(25) NOT NULL,
+    verify boolean,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.users_verify
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 356484 CACHE 1 ),
     user_id integer NOT NULL,
     verify_code character varying,
     is_confirmed boolean,
@@ -76,19 +79,7 @@ CREATE TABLE public.users_verify
     PRIMARY KEY (id)
 );
 
-ALTER TABLE public.candidate_activations
-    ADD FOREIGN KEY (user_id)
-    REFERENCES public.users (id)
-    NOT VALID;
-
-
 ALTER TABLE public.candidates
-    ADD FOREIGN KEY (user_id)
-    REFERENCES public.users (id)
-    NOT VALID;
-
-
-ALTER TABLE public.employer_activations
     ADD FOREIGN KEY (user_id)
     REFERENCES public.users (id)
     NOT VALID;
@@ -103,6 +94,24 @@ ALTER TABLE public.employers
 ALTER TABLE public.employess
     ADD FOREIGN KEY (user_id)
     REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_postings
+    ADD FOREIGN KEY (city_id)
+    REFERENCES public.city (id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_postings
+    ADD FOREIGN KEY (employer_id)
+    REFERENCES public.employers (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.job_postings
+    ADD FOREIGN KEY (job_position_id)
+    REFERENCES public.positions (id)
     NOT VALID;
 
 
