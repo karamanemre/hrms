@@ -42,7 +42,7 @@ public class VerifyCodeManager implements VerifyCodeService{
 
 	@Override
 	public void sendMail(String mail) {
-		System.out.println("Doğrulama Maili Gönderildi : " + mail);
+		System.out.println("Doğrulama Maili " + mail + " Adresine Gönderildi");
 		
 	}
 

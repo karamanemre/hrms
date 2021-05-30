@@ -16,6 +16,7 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployersDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Employers;
+import kodlamaio.hrms.entities.concretes.Users;
 
 @Service
 public class EmployersManager implements EmployersService{
@@ -57,9 +58,8 @@ public class EmployersManager implements EmployersService{
 		}
 		
 		this.employersDao.save(employers);
-		/*this.verifyCodeService.createVerifyCode(userDao.getOne(employer.getId()));
-		this.confirmEmployerService.createConfirmEmployer(employer);
-		this.verifyCodeService.sendMail(employer.getMail());*/
+		this.verifyCodeService.createVerifyCode(userDao.getOne(employers.getUserId()));
+		this.verifyCodeService.sendMail(employers.getEmail());
 		return new SuccessResult("Başarıyla Eklendi");
 	}
 
