@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,8 +42,14 @@ public class Users {
     @Column(name = "password")
     private String password;
     
+	@NotBlank(message="Password Alanı Boş olamaz")
     @Transient
     private String password_repeat;
+    
+
+	@JsonIgnore
+	@Column(name="verify")
+	private boolean verify = false;
     
   
 	

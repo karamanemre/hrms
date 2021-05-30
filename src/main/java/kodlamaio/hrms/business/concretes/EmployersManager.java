@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployersService;
+import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.emails.EmailRules;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
@@ -21,13 +22,14 @@ public class EmployersManager implements EmployersService{
 	
 	private EmployersDao employersDao;
 	private UserDao userDao;
-	private EmailRules emailRules;
+	private VerifyCodeService verifyCodeService;
 	
 	@Autowired
-	public EmployersManager(EmployersDao employersDao,UserDao userDao,EmailRules emailRules) {
+	public EmployersManager(EmployersDao employersDao,UserDao userDao,VerifyCodeService verifyCodeService) {
 		this.employersDao=employersDao;
 		this.userDao=userDao;
-		this.emailRules=emailRules;
+		this.verifyCodeService=verifyCodeService;
+		
 	}
 	
 	@Override
@@ -55,6 +57,9 @@ public class EmployersManager implements EmployersService{
 		}
 		
 		this.employersDao.save(employers);
+		/*this.verifyCodeService.createVerifyCode(userDao.getOne(employer.getId()));
+		this.confirmEmployerService.createConfirmEmployer(employer);
+		this.verifyCodeService.sendMail(employer.getMail());*/
 		return new SuccessResult("Başarıyla Eklendi");
 	}
 

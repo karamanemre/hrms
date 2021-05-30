@@ -3,6 +3,7 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobPostingService;
@@ -27,6 +28,22 @@ public class JobPostingManager implements JobPostingService{
 	public DataResult<List<JobPostings>> getAll() {
 		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAll());
 	}
+	
+	@Override
+	public DataResult<List<JobPostings>> getAllSortedDesc() {
+		Sort sort = Sort.by(Sort.Direction.DESC,"applicaitonDeadline");//tarihe göre azalan
+		return new SuccessDataResult<List<JobPostings>>
+		(this.jobPostingDao.findAll(sort));
+	}
+	
+	@Override
+	public DataResult<List<JobPostings>> getAllSortedAsc() {
+		Sort sort = Sort.by(Sort.Direction.ASC,"applicaitonDeadline");//tarihe göre artan
+		return new SuccessDataResult<List<JobPostings>>
+		(this.jobPostingDao.findAll(sort));
+	}
+		
+
 
 	@Override
 	public Result add(JobPostings jobPostings) {
@@ -35,8 +52,8 @@ public class JobPostingManager implements JobPostingService{
 	}
 
 	@Override
-	public DataResult<List<JobPostings>> findAllByActiveTrue() {
-		 return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActiveTrue(),"Aktif ilanlar listelendi");
+	public DataResult<List<JobPostings>> findAllByActive(boolean jobPosting) {
+		 return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActive(jobPosting),"Aktif ilanlar listelendi");
 	}
 
 
@@ -45,23 +62,9 @@ public class JobPostingManager implements JobPostingService{
 		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActiveTrueOrderByApplicaitonDeadline(),"Data Listelendi");
 	}
 
-	/*@Override
-	public Result setIsActiveValue(int id, boolean value) {
-		JobPostings jobPostings = this.jobPostingDao.findByEmployerAndIsActiveTrue(id);
-		jobPostings.setActive(value);
-		this.jobPostingDao.save(jobPostings);
-		return new SuccessResult("Aktiflik "+value+" olarak değiştirildi");
-	}
-
-	@Override
-	public DataResult<List<JobPostings>> getByIsActiveTrueAndEmployer(int id) {
-		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsActiveTrueAndEmployer(id));*/
-	}
-
 
 
 	
-
 
 	
 

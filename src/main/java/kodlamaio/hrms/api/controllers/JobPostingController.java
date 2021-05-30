@@ -2,6 +2,8 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,15 +34,25 @@ public class JobPostingController {
 		return jobPostingService.getAll();
 	}
 	
+	@GetMapping("/getAllSortedDesc")
+	public DataResult<List<JobPostings>> getAllSortedDesc() {
+		return this.jobPostingService.getAllSortedDesc();
+	}
+	
+	@GetMapping("/getAllSortedAcs")
+	public DataResult<List<JobPostings>> getAllSortedAcs() {
+		return this.jobPostingService.getAllSortedDesc();
+	}
+	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobPostings jobPostings){
+	public Result add(@Valid @RequestBody JobPostings jobPostings){
 		return jobPostingService.add(jobPostings);
 	}
 	
 	
-	@GetMapping("/getAllByActiveTrue")
-	public DataResult<List<JobPostings>> getAllByActiveTrue(){
-		return this.jobPostingService.findAllByActiveTrue();
+	@GetMapping("/getAllByActive")
+	public DataResult<List<JobPostings>> getAllByActiveTrue(boolean jobPosting){
+		return this.jobPostingService.findAllByActive(jobPosting);
 	}
 	
 	@GetMapping("/getAllByIsActiveTrueOrderByApplicaitonDeadline")
@@ -48,15 +60,8 @@ public class JobPostingController {
         return this.jobPostingService.findAllByIsActiveTrueOrderByApplicaitonDeadline();
     }
 	
-	/*@PostMapping("/setValue")
-    public Result setValue(@RequestParam int id, boolean value) {
-        return this.jobPostingService.setIsActiveValue(id, value);
-    }
 	
-	@GetMapping("/findAllByIsActiveTrueAndEmployerIdddd")
-    public DataResult<List<JobPostings>> findAllByIsActiveTrueAndEmployerId(@RequestParam int id) {
-        return this.jobPostingService.getByIsActiveTrueAndEmployer(id);*/
-    }
+	
 	
 	
 	

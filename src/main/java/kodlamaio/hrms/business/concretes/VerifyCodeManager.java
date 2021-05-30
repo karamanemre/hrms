@@ -10,6 +10,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.dataAccess.abstracts.VerifyCodeDao;
 import kodlamaio.hrms.entities.concretes.Users;
 import kodlamaio.hrms.entities.concretes.VerifyCode;
@@ -18,11 +19,13 @@ import kodlamaio.hrms.entities.concretes.VerifyCode;
 public class VerifyCodeManager implements VerifyCodeService{
 	
 	private VerifyCodeDao verifyCodeDao;
+	private UserDao userDao;
 	
 	@Autowired
-	public VerifyCodeManager(VerifyCodeDao verifyCodeDao) {
+	public VerifyCodeManager(VerifyCodeDao verifyCodeDao,UserDao userDao) {
 		super();
 		this.verifyCodeDao = verifyCodeDao;
+		this.userDao=userDao;
 	}
 
 	@Override
@@ -48,12 +51,22 @@ public class VerifyCodeManager implements VerifyCodeService{
 		if (!this.verifyCodeDao.existsByVerifyCode(code)) {
 			return new ErrorResult("Hatalı Doğrulama İşlemi");
 		}
+		
 		VerifyCode newVerifyCode = verifyCodeDao.getByVerifyCode(code);
+		if (this.verifyCodeDao.getOne(newVerifyCode.getId()).isConfirmed()) {
+			return new ErrorResult("Doğrulama işlemi daha önce yapıldı");
+		}
+		
 		LocalDate e = (LocalDate.now());
 		newVerifyCode.setConfirmed(true);
 		newVerifyCode.setConfirmedDate(Date.valueOf(e));
 		verifyCodeDao.save(newVerifyCode);
+		Users verifyUser = new Users();
+		verifyUser = userDao.getOne(newVerifyCode.getUserId().getUserId());
+		verifyUser.setVerify(true);
+		userDao.save(verifyUser);
 		return new SuccessResult("Doğrulama Başarılı");	
+		
 	}
 
 	

@@ -71,8 +71,8 @@ public class CandidateManager implements CandidateService{
 		}
 		
 		this.candidateDao.save(candidate);
-		//this.verifyCodeService.createVerifyCode(userDao.getOne(candidate.getUserId()));
-		//this.verifyCodeService.sendMail(candidate.getEmail());
+		this.verifyCodeService.createVerifyCode(userDao.getOne(candidate.getUserId()));
+		this.verifyCodeService.sendMail(candidate.getEmail());
 		return new SuccessResult("Başarıyla Eklendi");
 		
 		
