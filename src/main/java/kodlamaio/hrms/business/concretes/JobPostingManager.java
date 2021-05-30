@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobPostingService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
@@ -47,6 +48,7 @@ public class JobPostingManager implements JobPostingService{
 
 	@Override
 	public Result add(JobPostings jobPostings) {
+		
 		this.jobPostingDao.save(jobPostings);
 		return new SuccessResult("Data Eklendi");
 	}
@@ -61,6 +63,14 @@ public class JobPostingManager implements JobPostingService{
 	public DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline() {
 		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActiveTrueOrderByApplicaitonDeadline(),"Data Listelendi");
 	}
+
+	@Override
+	public DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool, int id) {
+		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsActiveAndEmployer(bool, id),"Data Listelendi");
+	}
+
+
+
 
 
 

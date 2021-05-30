@@ -60,6 +60,11 @@ public class JobPostingController {
         return this.jobPostingService.findAllByIsActiveTrueOrderByApplicaitonDeadline();
     }
 	
+	@GetMapping("/getByIsActiveAndEmployer")
+	public DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool,int id) {
+        return this.jobPostingService.getByIsActiveAndEmployer(bool,id);
+    }
+	
 	
 	
 	

@@ -12,6 +12,8 @@ public interface JobPostingService {
 	DataResult<List<JobPostings>> getAllSortedAsc();
 	DataResult<List<JobPostings>> findAllByActive(boolean jobPosting);
 	DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline();
+	DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool,int id);
+	
 	
 	
 }
