@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +31,8 @@ public class JobPositions{
 	@Column(name="id")
 	private int id; 
 	
+	@NotNull
+	@NotBlank(message = "Pozisyon ismi alanı boş bırakılamaz")
 	@Column(name="position_name")
 	private String positionName;
 	

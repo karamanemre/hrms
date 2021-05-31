@@ -25,9 +25,6 @@ public class VerifyCodeController {
 
 	@PutMapping("/{verifyCode}")
 	public Result update(@PathVariable("verifyCode") String verifyCode,	@RequestBody VerifyCode verifyingCode) {
-		
 		return verifyCodeService.verifyUser(verifyCode);
-		
-		
 	}
 }

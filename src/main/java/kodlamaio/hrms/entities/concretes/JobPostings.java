@@ -1,5 +1,8 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -29,6 +35,7 @@ public class JobPostings {
 	
 	
 	@NotBlank(message = "Açıklama Alanı Boş Bırakılamaz")
+	@NotNull
 	@Column(name = "description")
 	private String description;
 	
@@ -41,15 +48,21 @@ public class JobPostings {
 	private double maxSalary;
 	
 	@NotBlank(message = "Açık Pozisyon Sayısı Alanı Boş Bırakılamaz")
+	@NotNull
 	@Column(name = "number_of_open_positions")
 	private String numberOfOpenPosition;
 	
 	@NotBlank(message = "Son Başvuru Tarihi Alanı Boş Bırakılamaz")
+	@NotNull
 	@Column(name = "application_deadline")
 	private String applicaitonDeadline;
 	
 	@Column(name = "is_active")
 	private boolean isActive;
+	
+	@Column(name = "release_date", columnDefinition = "Date default CURRENT_DATE")
+	@JsonIgnore
+	private LocalDate releaseDate = LocalDate.now();
 	
 	@ManyToOne()
     @JoinColumn(name = "job_position_id")

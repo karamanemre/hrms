@@ -8,15 +8,31 @@ import org.springframework.data.repository.query.Param;
 
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	
-	 List<JobPostings> findAllByIsActive(boolean jobPosting);
-	 List<JobPostings> findAllByIsActiveTrueOrderByApplicaitonDeadline();
-	 @Query("From JobPostings where isActive=:bool and employer_id=:id")
-	 List<JobPostings> getByIsActiveAndEmployer(boolean bool,int id);
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(e.companyName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate) From JobPostings j Inner Join j.employer e where j.isActive=:bool order by j.applicaitonDeadline desc ")
+	 List<JobPostingsDto> findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(boolean bool);
 	 
-	 @Query("From JobPostings where employer_id=:employerId") // Aktiflik durumunu değiştirmek için
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(e.companyName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate) From JobPostings j Inner Join j.employer e where j.isActive=:bool order by j.applicaitonDeadline asc ")
+	 List<JobPostingsDto> findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(boolean bool);
+
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(e.companyName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate) From JobPostings j Inner Join j.employer e where e.companyName=:companyName and j.isActive=:bool")
+	 List<JobPostingsDto> getByIsActiveAndEmployer(String companyName,boolean bool);
+	 
+	 @Query("From JobPostings where employer_id=:employerId") 
 	 JobPostings getByEmployer(int employerId);
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(e.companyName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate) From JobPostings j Inner Join j.employer e")
+	 List<JobPostingsDto> getAll();
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(e.companyName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate) From JobPostings j Inner Join j.employer e where j.isActive=:isActive ")
+	 List<JobPostingsDto> getAllByIsActive(boolean isActive);
+	 
+	 
+	 
+	 
+	 
 	 
 }

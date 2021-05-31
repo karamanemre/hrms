@@ -23,15 +23,13 @@ public class CandidateManager implements CandidateService{
 	private CandidateDao candidateDao;
 	private UserDao userDao;
 	private CustomerCheckService<Candidate> customerCheckService;
-	private EmailRules emailRules;
 	private VerifyCodeService verifyCodeService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService<Candidate> customerCheckService,EmailRules emailRules, VerifyCodeService verifyCodeService) {
+	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService<Candidate> customerCheckService, VerifyCodeService verifyCodeService) {
 		this.candidateDao=jobSeekersDao;
 		this.userDao=userDao;
 		this.customerCheckService=customerCheckService;
-		this.emailRules=emailRules;
 		this.verifyCodeService=verifyCodeService;
 		
 	}

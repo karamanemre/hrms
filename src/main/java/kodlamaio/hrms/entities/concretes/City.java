@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class City {
     private int id;
 	
 	@NotBlank(message = "Şehir İsmi Alanı Bo Olamaz")
+	@NotNull
 	@Column(name = "city_name")
 	private String city;
 

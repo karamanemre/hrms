@@ -5,44 +5,39 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobPostingService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 @RequestMapping("/api/jobposting")
 @RestController
 public class JobPostingController {
 	
 	JobPostingService jobPostingService;
+	private ValidationException validationException;
 	
 	@Autowired
-	public JobPostingController(JobPostingService jobPostingService) {
+	public JobPostingController(JobPostingService jobPostingService,ValidationException validationException) {
 		this.jobPostingService=jobPostingService;
+		this.validationException=validationException;
 	}
 	
-	@GetMapping("/getall")
-	public DataResult<List<JobPostings>> getAll(){
-		return jobPostingService.getAll();
-	}
-	
-	@GetMapping("/getAllSortedDesc")
-	public DataResult<List<JobPostings>> getAllSortedDesc() {
-		return this.jobPostingService.getAllSortedDesc();
-	}
-	
-	@GetMapping("/getAllSortedAcs")
-	public DataResult<List<JobPostings>> getAllSortedAcs() {
-		return this.jobPostingService.getAllSortedDesc();
-	}
 	
 	@PostMapping("/add")
 	public Result add(@Valid @RequestBody JobPostings jobPostings){
@@ -50,19 +45,20 @@ public class JobPostingController {
 	}
 	
 	
-	@GetMapping("/getAllByActive")
-	public DataResult<List<JobPostings>> getAllByActiveTrue(boolean jobPosting){
-		return this.jobPostingService.findAllByActive(jobPosting);
-	}
+	@GetMapping("/getAllByIsActiveTrueOrderByApplicaitonDeadlineDesc")
+    public DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(boolean bool) {
+        return this.jobPostingService.findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(bool);
+    }
 	
-	@GetMapping("/getAllByIsActiveTrueOrderByApplicaitonDeadline")
-    public DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline() {
-        return this.jobPostingService.findAllByIsActiveTrueOrderByApplicaitonDeadline();
+
+	@GetMapping("/getAllByIsActiveTrueOrderByApplicaitonDeadlineAsc")
+    public DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(boolean bool) {
+        return this.jobPostingService.findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(bool);
     }
 	
 	@GetMapping("/getByIsActiveAndEmployer")
-	public DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool,int id) {
-        return this.jobPostingService.getByIsActiveAndEmployer(bool,id);
+	public DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool) {
+        return this.jobPostingService.getByIsActiveAndEmployer(companyName,bool);
     }
 	
 	
@@ -71,6 +67,26 @@ public class JobPostingController {
        return this.jobPostingService.toggleActiveStatus(id);
     }
 	
+	@GetMapping("/getAll")
+	public Result getJobPostingsDtoDetails() {
+	       return this.jobPostingService.getAll();
+	    }
+	
+	@GetMapping("/getAllByIsActive")
+	public Result getAllByIsActiveOrderByCreatedDate(boolean isActive ) {
+	       return this.jobPostingService.getAllByIsActive(isActive);
+	    }
+	
+	
+	
+	
+	
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorDataResult<Object> validation(MethodArgumentNotValidException exceptions) {
+		return validationException.handleValidationException(exceptions);
+	}
 	
 	
 	

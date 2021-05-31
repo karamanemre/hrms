@@ -40,6 +40,7 @@ public class Users {
 	@Email
     private String email;
     
+	
 	@Pattern(regexp = "^(?=.*\\d).{4,8}$", flags = Flag.UNICODE_CASE,message = "Şifreniz küçük harf,büyük harf,sembol ve rakam içermelidir")
 	@NotBlank(message="Password Alanı Boş olamaz")
     @Column(name = "password")
@@ -54,7 +55,7 @@ public class Users {
 	@Column(name="verify")
 	private boolean verify = false;
     
-  
+	
 	
 
 }

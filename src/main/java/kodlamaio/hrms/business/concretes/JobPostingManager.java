@@ -14,6 +14,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobPostingsDao;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 @Service
 public class JobPostingManager implements JobPostingService{
@@ -25,26 +26,6 @@ public class JobPostingManager implements JobPostingService{
 		this.jobPostingDao=jobPostingsDao;
 	}
 
-	@Override
-	public DataResult<List<JobPostings>> getAll() {
-		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAll());
-	}
-	
-	@Override
-	public DataResult<List<JobPostings>> getAllSortedDesc() {
-		Sort sort = Sort.by(Sort.Direction.DESC,"applicaitonDeadline");//tarihe göre azalan
-		return new SuccessDataResult<List<JobPostings>>
-		(this.jobPostingDao.findAll(sort));
-	}
-	
-	@Override
-	public DataResult<List<JobPostings>> getAllSortedAsc() {
-		Sort sort = Sort.by(Sort.Direction.ASC,"applicaitonDeadline");//tarihe göre artan
-		return new SuccessDataResult<List<JobPostings>>
-		(this.jobPostingDao.findAll(sort));
-	}
-		
-
 
 	@Override
 	public Result add(JobPostings jobPostings) {
@@ -53,20 +34,20 @@ public class JobPostingManager implements JobPostingService{
 		return new SuccessResult("Data Eklendi");
 	}
 
+
 	@Override
-	public DataResult<List<JobPostings>> findAllByActive(boolean jobPosting) {
-		 return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActive(jobPosting),"Aktif ilanlar listelendi");
+	public DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(boolean bool) {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(bool),"Data Listelendi");
+	}
+	
+	@Override
+	public DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(boolean bool) {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(bool),"Data Listelendi");
 	}
 
-
 	@Override
-	public DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline() {
-		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.findAllByIsActiveTrueOrderByApplicaitonDeadline(),"Data Listelendi");
-	}
-
-	@Override
-	public DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool, int id) {
-		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsActiveAndEmployer(bool, id),"Data Listelendi");
+	public DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool) {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getByIsActiveAndEmployer(companyName,bool),"Data Listelendi");
 	}
 
 	@Override
@@ -77,6 +58,19 @@ public class JobPostingManager implements JobPostingService{
 	     return new SuccessResult("Başarılı!");
 	     
 	}
+
+	@Override
+	public DataResult<List<JobPostingsDto>> getAll() {
+		
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAll(),"İş İlanları Listelendi");
+	}
+
+	@Override
+	public DataResult<List<JobPostingsDto>> getAllByIsActive(boolean isActive) {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAllByIsActive(isActive));
+	}
+
+	
 
 
 

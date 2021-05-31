@@ -4,17 +4,18 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 public interface JobPostingService {
-	DataResult<List<JobPostings>> getAll();
 	Result add(JobPostings jobPostings);
-	DataResult<List<JobPostings>> getAllSortedDesc();
-	DataResult<List<JobPostings>> getAllSortedAsc();
-	DataResult<List<JobPostings>> findAllByActive(boolean jobPosting);
-	DataResult<List<JobPostings>> findAllByIsActiveTrueOrderByApplicaitonDeadline();
-	DataResult<List<JobPostings>> getByIsActiveAndEmployer(boolean bool,int id);
-	
+	DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(boolean bool);
+	DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(boolean bool);
+	DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool);
 	Result toggleActiveStatus(int id);
+	DataResult<List<JobPostingsDto>> getAll();
+	
+	DataResult<List<JobPostingsDto>> getAllByIsActive(boolean isActive );
+	
 	
 	
 	
