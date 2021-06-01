@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
 public class Candidate extends Users {
 		
 	@NotBlank(message = "İsim Alanı Boş Olamaz")
@@ -54,8 +57,8 @@ public class Candidate extends Users {
 	
 	
 	
-	//@OneToOne(mappedBy = "candidateId")
-	//private List<CandidateCv> candidateCv;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<CandidateCv> candidateCv;
 	
 	    
 	   

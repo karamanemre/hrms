@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -122,28 +123,23 @@ public class CandidateCv {
 	@Column(name = "cover_letter")
 	private String  coverLetter;
 	
+	//@Column(name = "candidate_id")
+	@JoinColumn(name = "candidate_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Candidate candidateId;
 	
-	//@JoinColumn(name = "candidate_id")
-	//@OneToOne()
-	@Column(name = "candidate_id")
-	private int candidateId;
 	
+	@JoinColumn(name ="languages" )
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Languages languages;
 	
-	//@JoinColumn(name ="languages" )
-	//@ManyToOne
-	@Column(name = "languages")
-	private int languages;
+	@JoinColumn(name ="programming_language" )
+	@ManyToOne(fetch = FetchType.LAZY)
+	private ProgrammingLanguages programmingLanguage;
 	
-	//@JoinColumn(name ="programming_language" )
-	//@ManyToOne
-	@Column(name = "programming_language")
-	private int programmingLanguage;
-	
-	//@JoinColumn(name ="technology" )
-	//@ManyToOne
-	@Column(name = "technology")
-	private int technology;
-	
+	@JoinColumn(name ="technology" )
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Technology technology;
 	
 	
 	@NotNull
