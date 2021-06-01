@@ -1,11 +1,16 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
@@ -43,6 +48,15 @@ public class Candidate extends Users {
 	@NotNull
 	@Column(name = "birth_year")
 	private String dateOfBirth;
+	
+	@Transient
+	private String firstNameAndLastName=firstName+lastName;
+	
+	
+	
+	//@OneToOne(mappedBy = "candidateId")
+	//private List<CandidateCv> candidateCv;
+	
 	    
 	   
 	

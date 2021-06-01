@@ -3,6 +3,33 @@
 BEGIN;
 
 
+CREATE TABLE public.candidate_cv
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3568748 CACHE 1 ),
+    candidate_id integer NOT NULL,
+    is_go_to_school boolean NOT NULL,
+    school_name character varying,
+    school_section character varying,
+    school_admission_date character varying,
+    school_leaving_date character varying,
+    job_experience boolean NOT NULL,
+    job_company_name character varying,
+    job_position character varying,
+    job_admission_date character varying,
+    job_leaving_date character varying,
+    is_languages_knows boolean NOT NULL,
+    languages integer,
+    languages_level integer,
+    candidate_photo character varying NOT NULL,
+    github_adress character varying NOT NULL,
+    linkedin_adress character varying NOT NULL,
+    is_programming_language_knows boolean NOT NULL,
+    programming_language integer,
+    technology integer,
+    cover_letter text NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.candidates
 (
     user_id integer NOT NULL,
@@ -45,10 +72,18 @@ CREATE TABLE public.job_postings
     description text NOT NULL,
     city_id integer NOT NULL,
     number_of_open_positions character varying NOT NULL,
-    application_deadline character varying NOT NULL,
     is_active boolean NOT NULL,
     min_salary double precision,
     max_salary double precision,
+    application_deadline character varying NOT NULL,
+    release_date date NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.languages
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 11 MINVALUE 1 MAXVALUE 3543564 CACHE 1 ),
+    language_name character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -56,6 +91,20 @@ CREATE TABLE public.positions
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3854567 CACHE 1 ),
     position_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.programming_language
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3548575 CACHE 1 ),
+    programming_language_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.technology
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 3 MINVALUE 1 MAXVALUE 3548549 CACHE 1 ),
+    technology_name character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -78,6 +127,30 @@ CREATE TABLE public.users_verify
     confirmed_date date,
     PRIMARY KEY (id)
 );
+
+ALTER TABLE public.candidate_cv
+    ADD FOREIGN KEY (languages)
+    REFERENCES public.languages (id)
+    NOT VALID;
+
+
+ALTER TABLE public.candidate_cv
+    ADD FOREIGN KEY (programming_language)
+    REFERENCES public.programming_language (id)
+    NOT VALID;
+
+
+ALTER TABLE public.candidate_cv
+    ADD FOREIGN KEY (technology)
+    REFERENCES public.technology (id)
+    NOT VALID;
+
+
+ALTER TABLE public.candidate_cv
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
+    NOT VALID;
+
 
 ALTER TABLE public.candidates
     ADD FOREIGN KEY (user_id)
