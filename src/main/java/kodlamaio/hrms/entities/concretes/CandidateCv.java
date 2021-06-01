@@ -70,7 +70,6 @@ public class CandidateCv {
 	private String  jobCompanyName;
 	
 	
-	
 	@Column(name = "job_position")
 	private String jobPosition;
 	
@@ -94,9 +93,6 @@ public class CandidateCv {
 	
 	@Column(name = "languages_level")
 	private int languagesLevel;
-	
-	
-	
 	
 	
 	@NotNull

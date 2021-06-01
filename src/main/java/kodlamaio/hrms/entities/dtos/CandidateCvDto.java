@@ -11,8 +11,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CandidateCvDto {
 	
+	
+	private String candidateName;
+	private String candidateSurname;
+	private String schoolName;
+	private String schoolSection;
+	private String schoolAdmissionDate;
+	private String schoolLeavingDate;
+	private String jobCompanyName;
+	private String jobPosition;
+	private String jobAdmissionDate;
+	private String jobLeavingDate;
+	private String githubAdress;
+	private String linkedinAdress;
 	private String  coverLetter;
-	private String firstName;
+	
 	
 	
 }

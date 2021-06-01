@@ -58,11 +58,11 @@ public class CandidateCvControllers {
 	}
 	
 
-	/*@GetMapping("/getAlllllllllllllllll")
+	@GetMapping("/getAlllllllllllllllll")
 	public DataResult<List<CandidateCvDto>> getAllllll() {
 		return this.candidateCvService.getAllllll();
 	}
-	*/
+	
 	
 	
 	

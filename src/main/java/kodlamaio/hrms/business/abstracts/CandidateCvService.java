@@ -13,5 +13,5 @@ public interface CandidateCvService {
 	DataResult<List<CandidateCv>> getAll();
 	DataResult<List<CandidateCv>> getAllSchoolName();
 	DataResult<List<CandidateCv>> getAllJobExperience();
-	//DataResult<List<CandidateCvDto>> getAllllll();
+	DataResult<List<CandidateCvDto>> getAllllll();
 }

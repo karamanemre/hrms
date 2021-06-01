@@ -45,6 +45,8 @@ public class CandidateController {
 		return this.candidateService.getAll();
 	}
 	
+	
+	
 	@PostMapping("/add")
 	public Result add(@Valid @RequestBody Candidate candidate) {
 		return this.candidateService.add(candidate);

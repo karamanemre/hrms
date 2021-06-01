@@ -46,11 +46,11 @@ public class CandidateCvManager implements CandidateCvService{
 	}
 
 
-	/*@Override
+	@Override
 	public DataResult<List<CandidateCvDto>> getAllllll() {
 		
-		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateCvDao.getAllllll(),"Data Listelendi dto");
-	}*/
+		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateCvDao.getAllDto(),"Data Listelendi dto");
+	}
 
 	
 
