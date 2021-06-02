@@ -5,36 +5,35 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.business.abstracts.TechnologyService;
+import kodlamaio.hrms.business.abstracts.SchoolService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
+import kodlamaio.hrms.dataAccess.abstracts.SchoolDao;
 import kodlamaio.hrms.dataAccess.abstracts.TechnologyDao;
+import kodlamaio.hrms.entities.concretes.School;
 import kodlamaio.hrms.entities.concretes.Technology;
 
 @Service
-public class TechnologyManager implements TechnologyService{
+public class SchoolManager implements SchoolService{
 	
-	private TechnologyDao technologyDao;
+	private SchoolDao schoolDao;
 	
 	@Autowired
-	public TechnologyManager(TechnologyDao technologyDao) {
-		this.technologyDao=technologyDao;
+	public SchoolManager(SchoolDao schoolDao) {
+		this.schoolDao=schoolDao;
 	}
 
 	@Override
-	public Result add(Technology technology) {
-		this.technologyDao.save(technology);
+	public Result add(School school) {
+		this.schoolDao.save(school);
 		return new SuccessResult("Eklendi");
 	}
 
 	@Override
-	public DataResult<List<Technology>> getAll() {
-		return new SuccessDataResult<List<Technology>>(this.technologyDao.findAll());
+	public DataResult<List<School>> getAll() {
+		return new SuccessDataResult<List<School>>(this.schoolDao.getAll(),"Data Listelendi");
 	}
-	
-	
 
-	
 }

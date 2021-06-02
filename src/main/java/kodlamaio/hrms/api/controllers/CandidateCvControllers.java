@@ -20,8 +20,10 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.Candidate;
 import kodlamaio.hrms.entities.concretes.CandidateCv;
 import kodlamaio.hrms.entities.dtos.CandidateCvDto;
+
 
 @RestController
 @RequestMapping("/api/candidatecv")
@@ -36,34 +38,25 @@ public class CandidateCvControllers {
 		this.validationException=validationException;
 	}
 	
-	@PostMapping("/add")
-	public Result add(@Valid @RequestBody CandidateCv candidateCv) {
-		
-		return candidateCvService.add(candidateCv);
-	}
-	
 	@GetMapping("/getAll")
-	public DataResult<List<CandidateCv>> getAll() {
-		return this.candidateCvService.getAll();
+	public DataResult<List<CandidateCv>> findAll(){
+		return this.candidateCvService.findAll();
 	}
 	
-	@GetMapping("/getAllScholName")
-	public DataResult<List<CandidateCv>> getAllSchoolName() {
-		return this.candidateCvService.getAllSchoolName();
+	@GetMapping("/getallDtoo")
+	public DataResult<List<CandidateCvDto>> getAllDto(int id){
+		return this.candidateCvService.getAllDto(id);
 	}
 	
-	@GetMapping("/getAllJobExperience")
-	public DataResult<List<CandidateCv>> getAllJobExperience() {
-		return this.candidateCvService.getAllJobExperience();
+	@GetMapping("/getAllCandidateId")
+	public DataResult<List<CandidateCv>> getAllCandidateId(int id){
+		return this.candidateCvService.getByCandidateId(id);
 	}
 	
-
-	@GetMapping("/getAlllllllllllllllll")
-	public DataResult<List<CandidateCvDto>> getAllllll() {
-		return this.candidateCvService.getAllllll();
+	@PostMapping("/add")
+	public Result add(@Valid @RequestBody CandidateCv candidateCv){
+		return this.candidateCvService.add(candidateCv);
 	}
-	
-	
 	
 	
 	

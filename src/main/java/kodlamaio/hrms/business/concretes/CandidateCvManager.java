@@ -14,6 +14,7 @@ import kodlamaio.hrms.dataAccess.abstracts.CandidateCvDao;
 import kodlamaio.hrms.entities.concretes.CandidateCv;
 import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 
+
 @Service
 public class CandidateCvManager implements CandidateCvService{
 	
@@ -25,32 +26,31 @@ public class CandidateCvManager implements CandidateCvService{
 	}
 
 	@Override
+	public DataResult<List<CandidateCv>> findAll() {
+		return new SuccessDataResult<List<CandidateCv>>(this.candidateCvDao.findAll(),"Data Listelendi");
+	}
+
+	@Override
 	public Result add(CandidateCv candidateCv) {
+		
 		this.candidateCvDao.save(candidateCv);
 		return new SuccessResult("Eklendi");
 	}
 
 	@Override
-	public DataResult<List<CandidateCv>> getAll() {
-		return new SuccessDataResult<List<CandidateCv>>(this.candidateCvDao.findAll(),"Data Listelendi");
-	}
-
-	@Override
-	public DataResult<List<CandidateCv>> getAllSchoolName() {
-		return new SuccessDataResult<List<CandidateCv>>(this.candidateCvDao.getAllSchoolName(),"Data Listelendi");
-	}
-
-	@Override
-	public DataResult<List<CandidateCv>> getAllJobExperience() {
-		return new SuccessDataResult<List<CandidateCv>>(this.candidateCvDao.getAllJobExperience(),"Data Listelendi");
-	}
-
-
-	@Override
-	public DataResult<List<CandidateCvDto>> getAllllll() {
+	public DataResult<List<CandidateCvDto>> getAllDto(int id) {
 		
-		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateCvDao.getAllDto(),"Data Listelendi dto");
+		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateCvDao.getAllDto(id),"Data Listelendi");
+
+	
 	}
+
+	@Override
+	public DataResult<List<CandidateCv>> getByCandidateId(int id) {
+		return new SuccessDataResult<List<CandidateCv>>(this.candidateCvDao.getByCandidateId(id));
+	}
+	
+	
 
 	
 

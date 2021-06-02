@@ -13,18 +13,15 @@ import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 public interface CandidateCvDao extends JpaRepository<CandidateCv, Integer>{
 	
 	
-	@Query("From CandidateCv where isGoToSchool=true order by schoolLeavingDate desc")
-	List<CandidateCv> getAllSchoolName();
+	@Query("Select new kodlamaio.hrms.entities.dtos.CandidateCvDto(s.schoolName,l.languageName,l.languageLevel,je.companyName,"
+			+ "je.startingYear,je.finishYear,cv.githubLink,cv.linkedinLink,cv.description) " 
+			+ "From CandidateCv cv  Inner Join cv.schools s  Inner Join cv.languages l Inner Join cv.jobExperiences je"
+			+ " where cv.id=:id")
+	List<CandidateCvDto> getAllDto(int id);
 	
-	@Query("From CandidateCv where jobExperience=true order by jobLeavingDate desc")
-	List<CandidateCv> getAllJobExperience();
+	@Query("From CandidateCv where id=:id")
+	List<CandidateCv> getByCandidateId(int id);
 	
-	
-	@Query("Select new kodlamaio.hrms.entities.dtos.CandidateCvDto(c.firstName,c.lastName,cv.schoolName,cv.schoolSection,"
-			+ "cv.schoolAdmissionDate,cv.schoolLeavingDate,cv.jobCompanyName,cv.jobPosition,cv.jobAdmissionDate,"
-			+ "cv.jobLeavingDate,cv.githubAdress,cv.linkedinAdress,cv.coverLetter)"
-			+ " From Candidate c Inner Join c.candidateCv cv")
-	List<CandidateCvDto> getAllDto();
 	
 	
 }

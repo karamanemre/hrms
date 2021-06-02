@@ -52,13 +52,12 @@ public class Candidate extends Users {
 	@Column(name = "birth_year")
 	private String dateOfBirth;
 	
-	@Transient
-	private String firstNameAndLastName=firstName+lastName;
-	
-	
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	@OneToMany(mappedBy="candidateId")
 	private List<CandidateCv> candidateCv;
+	
+	
+	//@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	//private List<CandidateCv> candidateCv;
 	
 	    
 	   

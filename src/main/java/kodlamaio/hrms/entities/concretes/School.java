@@ -2,7 +2,6 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,9 +29,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "technology")
+@Table(name = "schools")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
-public class Technology {
+public class School {
+	
 	
 	@Id
 	@Column(name = "id")
@@ -39,8 +40,20 @@ public class Technology {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "technology")
-	private String technology;
+	@Column(name = "school_name")
+	private String schoolName;
+	
+	@NotBlank(message="Boş Geçilemez")
+	@Column(name = "section")
+	private String section;
+	
+	@NotBlank(message="Boş Geçilemez")
+	@Column(name = "starting_year")
+	private String startingYear;
+	
+	@Column(name = "finish_year")
+	private String finishYear;
+	
 	
 	@Column(name = "cv_id")
 	private int cvId;
@@ -49,7 +62,5 @@ public class Technology {
     @JoinColumn(name = "cv_id",insertable = false, updatable = false)
 	@JsonIgnore
     private CandidateCv candidateCv;
-	
-	
 	
 }

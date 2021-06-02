@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,8 +18,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
+import jdk.vm.ci.meta.Local;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,110 +43,49 @@ public class CandidateCv {
 	private int id;
 	
 	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "is_go_to_school")
-	private boolean isGoToSchool;
+	@Column(name = "photo_link")
+	private String photoLink;
 	
 	
-	@Column(name = "school_name")
-	private String schoolName;
+	@Column(name = "github_link")
+	private String githubLink;
 	
 	
-	@Column(name = "school_section")
-	private String schoolSection;
+	@Column(name = "linkedin_link")
+	private String linkedinLink;
 	
 	
-	@Column(name = "school_admission_date")
-	private String schoolAdmissionDate;
+	@Column(name = "description")
+	private String description;
 	
 	
-	@Column(name = "school_leaving_date")
-	private String schoolLeavingDate;
+	@Column(name = "creadet_date")
+	private LocalDate creadetDate=LocalDate.now();
+	
+	@Column(name = "is_active")
+	private boolean isActive;
 	
 	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "job_experience")
-	private boolean  jobExperience;
-	
-	
-	@Column(name = "job_company_name")
-	private String  jobCompanyName;
-	
-	
-	@Column(name = "job_position")
-	private String jobPosition;
-	
-	
-	
-	@Column(name = "job_admission_date")
-	private String jobAdmissionDate;
-	
-	
-	
-	@Column(name = "job_leaving_date")
-	private String jobLeavingDate;
-	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "is_languages_knows")
-	private boolean isLanguagesKnows;
-	
-	
-	
-	@Column(name = "languages_level")
-	private int languagesLevel;
-	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "github_adress")
-	private String githubAdress;
-	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "linkedin_adress")
-	private String linkedinAdress;
-	
-	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "is_programming_language_knows")
-	private boolean isProgrammingLanguageKnows;
-	
-	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "cover_letter")
-	private String  coverLetter;
-	
-	//@Column(name = "candidate_id")
-	@JoinColumn(name = "candidate_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Candidate.class)
+	@JoinColumn(name = "candidate_id", referencedColumnName =  "user_id" ,nullable = false)
 	private Candidate candidateId;
 	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateCv")
+	private List<Languages> languages;
 	
-	@JoinColumn(name ="languages" )
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Languages languages;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateCv")
+	private List<School> schools;
 	
-	@JoinColumn(name ="programming_language" )
-	@ManyToOne(fetch = FetchType.LAZY)
-	private ProgrammingLanguages programmingLanguage;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateCv")
+	private List<Technology> technology;
 	
-	@JoinColumn(name ="technology" )
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Technology technology;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateCv")
+	private List<JobExperience> jobExperiences;
 	
 	
-	@NotNull
-	@NotBlank(message = "Bu Alan Boş bırakılamaz")
-	@Column(name = "candidate_photo")
-	private String candidatePhoto;
+	
+	
+	
+
 	
 }

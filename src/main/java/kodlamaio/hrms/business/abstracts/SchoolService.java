@@ -4,11 +4,11 @@ import java.util.List;
 
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
-import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.concretes.School;
 
-public interface TechnologyService {
+public interface SchoolService {
+	Result add(School school);
 	
-	Result add(Technology technology);
-	DataResult<List<Technology>> getAll();
 	
+	DataResult<List<School>> getAll();
 }

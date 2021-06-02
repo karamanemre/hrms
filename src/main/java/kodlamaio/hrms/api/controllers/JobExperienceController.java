@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.axis.types.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,35 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.TechnologyService;
+import kodlamaio.hrms.business.abstracts.JobExperienceService;
+
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
-import kodlamaio.hrms.entities.concretes.Languages;
-import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.concretes.JobExperience;
+
 
 @RestController
-@RequestMapping("/api/technology")
-public class TechnologyController {
+@RequestMapping("/api/jobexperience")
+public class JobExperienceController {
 	
-	private TechnologyService technologyService;
+	private JobExperienceService jobExperienceService;
 	
 	@Autowired
-	public TechnologyController(TechnologyService technologyService) {
+	public JobExperienceController(JobExperienceService jobExperienceService) {
 		super();
-		this.technologyService = technologyService;
+		this.jobExperienceService = jobExperienceService;
 	}
 	
-	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody Technology technology) {
-		return this.technologyService.add(technology);
+	public Result add(@Valid @RequestBody JobExperience jobExperience) {
+		return this.jobExperienceService.add(jobExperience);
 	}
 
 	@GetMapping("/getAll")
-	public DataResult<List<Technology>> getAll() {
-		return this.technologyService.getAll();
+	public DataResult<List<JobExperience>> getAll() {
+		return this.jobExperienceService.getAll();
 	}
-	
-	
 	
 }
