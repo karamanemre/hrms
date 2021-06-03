@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.TechnologyService;
 import kodlamaio.hrms.core.utilities.DataResult;
+import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
@@ -25,6 +27,10 @@ public class TechnologyManager implements TechnologyService{
 
 	@Override
 	public Result add(Technology technology) {
+		if (technologyDao.existsByTechnologyId(technology) && technologyDao.existsByCvId(technology.getCvId())) {
+			return new ErrorResult("Aynı Teknolojiyi Tekrar Ekleyemezsiniz");
+			
+		}
 		this.technologyDao.save(technology);
 		return new SuccessResult("Eklendi");
 	}

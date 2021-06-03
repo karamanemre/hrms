@@ -13,6 +13,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
@@ -45,6 +47,8 @@ public class Candidate extends Users {
 	@NotBlank(message = "Tc Kimlik No Alanı Boş Olamaz")
 	@NotNull
 	@Column(name = "national_id")
+	@Size(min = 11, max = 11, message = "Tc kimlik numarası 11 haneli olmalıdır")
+	@Pattern(regexp = "(^[1-9][0-9]*$)|(^\\d{10}$)", message = "Tc kimlik numarası 0 ile başlayamaz veya metin içeremez.")
 	private String nationalId;
 	
 	@NotBlank(message = "Doğum Yılı Alanı Boş Olamaz")

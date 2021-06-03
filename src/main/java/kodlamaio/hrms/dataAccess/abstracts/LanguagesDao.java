@@ -7,4 +7,5 @@ import kodlamaio.hrms.entities.concretes.Languages;
 
 public interface LanguagesDao extends JpaRepository<Languages, Integer>{
 	boolean existsByLanguageName(String languageName);
+	boolean existsByCvId(int cvId);
 }
