@@ -24,10 +24,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "technology_name_list")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","technology"})
-public class TechnologyNameList {
-	
+@Table(name = "languages")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
+public class LanguageNameList {
 	
 	@Id
 	@Column(name = "id")
@@ -35,10 +34,20 @@ public class TechnologyNameList {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "name")
-	private String name;
+	@Column(name = "language_name")
+	private int languageName;
 	
-	@OneToMany(mappedBy = "technologyNameList")
-	private List<Technology> technology;
+	@OneToMany(mappedBy = "languageNameList")
+	private List<Languages> languages;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

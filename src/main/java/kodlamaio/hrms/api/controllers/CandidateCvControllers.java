@@ -43,10 +43,10 @@ public class CandidateCvControllers {
 		return this.candidateCvService.findAll();
 	}
 	
-	@GetMapping("/getallDtoo")
+	/*@GetMapping("/getallDtoo")
 	public DataResult<List<CandidateCvDto>> getAllDto(int id){
 		return this.candidateCvService.getAllDto(id);
-	}
+	}*/
 	
 	@GetMapping("/getAllCandidateId")
 	public DataResult<List<CandidateCv>> getAllCandidateId(int id){

@@ -1,6 +1,8 @@
 package kodlamaio.hrms.entities.concretes;
 
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,27 +39,38 @@ public class School {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "school_name")
-	private String schoolName;
-	
-	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "section")
-	private String section;
-	
-	@NotBlank(message="Boş Geçilemez")
 	@Column(name = "starting_year")
-	private String startingYear;
+	private Date startingYear;
 	
 	@Column(name = "finish_year")
 	private String finishYear;
 	
-	
+	@NotBlank(message="Boş Geçilemez")
 	@Column(name = "cv_id")
 	private int cvId;
+	
+	@NotBlank(message="Boş Geçilemez")
+	@Column(name = "school_name")
+	private int schoolId;
+	
+	@NotBlank(message="Boş Geçilemez")
+	@Column(name = "section")
+	private int schoolSectionId;
+	
 	
 	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id",insertable = false, updatable = false)
 	@JsonIgnore
     private CandidateCv candidateCv;
+	
+	@ManyToOne(targetEntity = SchoolNameList.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "school_name",insertable = false, updatable = false)
+	@JsonIgnore
+    private SchoolNameList schoolNameList;
+	
+	@ManyToOne(targetEntity = SchoolSection.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "section",insertable = false, updatable = false)
+	@JsonIgnore
+    private SchoolSection schoollSection;
 	
 }

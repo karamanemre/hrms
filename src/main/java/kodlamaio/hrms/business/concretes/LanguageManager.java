@@ -37,8 +37,8 @@ public class LanguageManager implements Languageservice{
 
 	@Override
 	public Result add(Languages languages) {
-		if (languagesDao.existsByLanguageName(languages.getLanguageName()) && languagesDao.existsByCvId(languages.getCvId())) {
-			return new ErrorResult("Daha önce "+languages.getLanguageName()+" eklendi lütfen farklı bir dil deneyin");
+		if (languagesDao.existsByLanguageIdAndCvId(languages.getLanguageId(),languages.getCvId())) {
+			return new ErrorResult("Daha önce eklendi lütfen farklı bir dil deneyin");
 		}
 		this.languagesDao.save(languages);
 		return new SuccessResult("Eklendi");

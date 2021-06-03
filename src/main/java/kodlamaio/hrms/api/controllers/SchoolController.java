@@ -41,13 +41,18 @@ public class SchoolController {
 	
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody School school) {
+	public Result add(@RequestBody School school) {
 		return this.schoolService.add(school);
 	}
 
 	@GetMapping("/getAll")
 	public DataResult<List<School>> getAll() {
 		return this.schoolService.getAll();
+	}
+	
+	@GetMapping("/getAllOrderByFinishYear")
+	public DataResult<List<School>> getAllOrderByFinishYear() {
+		return this.schoolService.getAllOrderByFinishYear();
 	}
 	
 	

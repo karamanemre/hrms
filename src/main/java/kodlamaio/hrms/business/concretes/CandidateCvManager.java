@@ -37,13 +37,13 @@ public class CandidateCvManager implements CandidateCvService{
 		return new SuccessResult("Eklendi");
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<CandidateCvDto>> getAllDto(int id) {
 		
 		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateCvDao.getAllDto(id),"Data Listelendi");
 
 	
-	}
+	}*/
 
 	@Override
 	public DataResult<List<CandidateCv>> getByCandidateId(int id) {

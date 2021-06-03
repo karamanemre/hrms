@@ -27,13 +27,21 @@ public class SchoolManager implements SchoolService{
 
 	@Override
 	public Result add(School school) {
+		if (school.getFinishYear().equals("")) {
+			school.setFinishYear("Devam ediyor");
+		}
 		this.schoolDao.save(school);
 		return new SuccessResult("Eklendi");
 	}
 
 	@Override
 	public DataResult<List<School>> getAll() {
-		return new SuccessDataResult<List<School>>(this.schoolDao.getAll(),"Data Listelendi");
+		return new SuccessDataResult<List<School>>(this.schoolDao.findAll(),"Data Listelendi");
+	}
+
+	@Override
+	public DataResult<List<School>> getAllOrderByFinishYear() {
+		return new SuccessDataResult<List<School>>(this.schoolDao.getOrderByFinishYear(),"Data Listelendi");
 	}
 
 }

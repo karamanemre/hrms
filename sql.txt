@@ -5,28 +5,14 @@ BEGIN;
 
 CREATE TABLE public.candidate_cv
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3568748 CACHE 1 ),
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 384897 CACHE 1 ),
     candidate_id integer NOT NULL,
-    is_go_to_school boolean NOT NULL,
-    school_name character varying,
-    school_section character varying,
-    school_admission_date character varying,
-    school_leaving_date character varying,
-    job_experience boolean NOT NULL,
-    job_company_name character varying,
-    job_position character varying,
-    job_admission_date character varying,
-    job_leaving_date character varying,
-    is_languages_knows boolean NOT NULL,
-    languages integer,
-    languages_level integer,
-    candidate_photo character varying NOT NULL,
-    github_adress character varying NOT NULL,
-    linkedin_adress character varying NOT NULL,
-    is_programming_language_knows boolean NOT NULL,
-    programming_language integer,
-    technology integer,
-    cover_letter text NOT NULL,
+    photo_link character varying NOT NULL,
+    linkedin_link character varying NOT NULL,
+    github_link character varying NOT NULL,
+    description text NOT NULL,
+    creadet_date date,
+    is_active boolean,
     PRIMARY KEY (id)
 );
 
@@ -64,6 +50,17 @@ CREATE TABLE public.employess
     PRIMARY KEY (user_id)
 );
 
+CREATE TABLE public.job_experience
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 32546584 CACHE 1 ),
+    company_name character varying NOT NULL,
+    position_name integer NOT NULL,
+    cv_id integer NOT NULL,
+    starting_year date NOT NULL,
+    finish_year character varying,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.job_postings
 (
     id integer NOT NULL,
@@ -80,10 +77,19 @@ CREATE TABLE public.job_postings
     PRIMARY KEY (id)
 );
 
+CREATE TABLE public.language_name_list
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3354384 CACHE 1 ),
+    name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.languages
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 11 MINVALUE 1 MAXVALUE 3543564 CACHE 1 ),
-    language_name character varying NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 3546564 CACHE 1 ),
+    cv_id integer NOT NULL,
+    language_name integer,
+    language_level integer,
     PRIMARY KEY (id)
 );
 
@@ -94,17 +100,43 @@ CREATE TABLE public.positions
     PRIMARY KEY (id)
 );
 
-CREATE TABLE public.programming_language
+CREATE TABLE public.school_name_list
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3548575 CACHE 1 ),
-    programming_language_name character varying NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3545845 CACHE 1 ),
+    school_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.school_section
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 34586745 CACHE 1 ),
+    section_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.schools
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3543652 CACHE 1 ),
+    cv_id integer NOT NULL,
+    school_name integer NOT NULL,
+    section integer NOT NULL,
+    starting_year date NOT NULL,
+    finish_year character varying,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.technology
 (
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 3 MINVALUE 1 MAXVALUE 3548549 CACHE 1 ),
-    technology_name character varying NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 5 MINVALUE 1 MAXVALUE 354684 CACHE 1 ),
+    cv_id integer NOT NULL,
+    technology_id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.technology_name_list
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 7 MINVALUE 1 MAXVALUE 354864765 CACHE 1 ),
+    name character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -127,24 +159,6 @@ CREATE TABLE public.users_verify
     confirmed_date date,
     PRIMARY KEY (id)
 );
-
-ALTER TABLE public.candidate_cv
-    ADD FOREIGN KEY (languages)
-    REFERENCES public.languages (id)
-    NOT VALID;
-
-
-ALTER TABLE public.candidate_cv
-    ADD FOREIGN KEY (programming_language)
-    REFERENCES public.programming_language (id)
-    NOT VALID;
-
-
-ALTER TABLE public.candidate_cv
-    ADD FOREIGN KEY (technology)
-    REFERENCES public.technology (id)
-    NOT VALID;
-
 
 ALTER TABLE public.candidate_cv
     ADD FOREIGN KEY (candidate_id)
@@ -170,6 +184,12 @@ ALTER TABLE public.employess
     NOT VALID;
 
 
+ALTER TABLE public.job_experience
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.candidate_cv (id)
+    NOT VALID;
+
+
 ALTER TABLE public.job_postings
     ADD FOREIGN KEY (city_id)
     REFERENCES public.city (id)
@@ -185,6 +205,48 @@ ALTER TABLE public.job_postings
 ALTER TABLE public.job_postings
     ADD FOREIGN KEY (job_position_id)
     REFERENCES public.positions (id)
+    NOT VALID;
+
+
+ALTER TABLE public.languages
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.candidate_cv (id)
+    NOT VALID;
+
+
+ALTER TABLE public.languages
+    ADD FOREIGN KEY (language_name)
+    REFERENCES public.language_name_list (id)
+    NOT VALID;
+
+
+ALTER TABLE public.schools
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.candidate_cv (id)
+    NOT VALID;
+
+
+ALTER TABLE public.schools
+    ADD FOREIGN KEY (school_name)
+    REFERENCES public.school_name_list (id)
+    NOT VALID;
+
+
+ALTER TABLE public.schools
+    ADD FOREIGN KEY (section)
+    REFERENCES public.school_section (id)
+    NOT VALID;
+
+
+ALTER TABLE public.technology
+    ADD FOREIGN KEY (cv_id)
+    REFERENCES public.candidate_cv (id)
+    NOT VALID;
+
+
+ALTER TABLE public.technology
+    ADD FOREIGN KEY (technology_id)
+    REFERENCES public.technology_name_list (id)
     NOT VALID;
 
 

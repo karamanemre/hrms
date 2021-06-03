@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,10 +25,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "technology_name_list")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","technology"})
-public class TechnologyNameList {
-	
+@Table(name = "school_name_list")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","schools"})
+public class SchoolNameList {
 	
 	@Id
 	@Column(name = "id")
@@ -35,10 +35,10 @@ public class TechnologyNameList {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "name")
-	private String name;
+	@Column(name = "school_name")
+	private String schoolName;
 	
-	@OneToMany(mappedBy = "technologyNameList")
-	private List<Technology> technology;
-
+	@OneToMany(mappedBy = "schoolNameList")
+	private List<School> schools;
+	
 }

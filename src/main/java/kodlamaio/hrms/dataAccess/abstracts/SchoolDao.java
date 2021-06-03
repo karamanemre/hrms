@@ -10,6 +10,6 @@ import kodlamaio.hrms.entities.concretes.School;
 public interface SchoolDao extends JpaRepository<School, Integer>{
 	
 	@Query("From School order by finishYear desc")
-	List<School> getAll();
+	List<School> getOrderByFinishYear();
 
 }

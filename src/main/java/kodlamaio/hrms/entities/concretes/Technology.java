@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
@@ -34,16 +32,14 @@ public class Technology {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	//@NotBlank(message="Boş Geçilemez")
-	//@Column(name = "technology")
-	//private String technology;
-	
-	//@NotNull
+	@NotNull
 	@Column(name = "cv_id")
 	private int cvId;
 	
+	@NotNull
 	@Column(name = "technology_id")
 	private int technologyId;
+	
 	
 	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id",insertable = false, updatable = false)
@@ -52,9 +48,11 @@ public class Technology {
 	
 	
 	@ManyToOne(targetEntity = TechnologyNameList.class, fetch = FetchType.EAGER)
-	@JsonIgnore
     @JoinColumn(name = "technology_id",insertable = false, updatable = false)
+	@JsonIgnore
 	private TechnologyNameList technologyNameList;
+	
+
 	
 	
 	

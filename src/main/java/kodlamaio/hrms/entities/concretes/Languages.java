@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,19 +41,31 @@ public class Languages {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotBlank(message="Boş Geçilemez")
+	@NotNull
 	@Column(name = "language_name")
-	private String languageName;
+	private int languageId;
 	
-	@NotBlank(message="Boş Geçilemez")
+	@NotNull
 	@Column(name = "language_level")
-	private String languageLevel;
+	private int languageLevel;
 	
-	@Column(name = "cv_id") //null hatasını etkisiz kılmak için cvid girişi yapılmalı json ignore verilerine dikkat!!
-	private int cvId;
+	@NotNull
+	@Column(name = "cv_id") //null hatasını etkisiz kılmak için cvid girişi yapılmalı ve jsoncolumn verilerine dikkat!!
+	private int cvId;       
 	
 	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id",insertable = false, updatable = false)
 	@JsonIgnore
     private CandidateCv candidateCv;
+	
+	@ManyToOne(targetEntity = LanguageNameList.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "language_name",insertable = false, updatable = false)
+	@JsonIgnore
+	private LanguageNameList languageNameList;
+	
+	
+	
+	
+	
+	
 }

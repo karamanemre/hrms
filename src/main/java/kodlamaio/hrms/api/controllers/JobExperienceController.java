@@ -48,6 +48,11 @@ public class JobExperienceController {
 		return this.jobExperienceService.getAll();
 	}
 	
+	@GetMapping("/getAllOrderByFinishYearDesc")
+	public DataResult<List<JobExperience>> getAllOrderByFinishYearDesc() {
+		return this.jobExperienceService.getAllOrderByFinishYearDesc();
+	}
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

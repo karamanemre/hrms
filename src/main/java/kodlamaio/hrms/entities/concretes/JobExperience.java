@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -45,13 +46,14 @@ public class JobExperience {
 	@Column(name = "position_name")
 	private int positionName;
 	
-	@NotBlank(message="Boş Geçilemez")
+	@NotNull
 	@Column(name = "starting_year")
-	private String startingYear;
+	private Date startingYear;
 	
 	@Column(name = "finish_year")
 	private String finishYear;
-
+	
+	@NotNull
 	@Column(name = "cv_id")
 	private int cvId;
 	

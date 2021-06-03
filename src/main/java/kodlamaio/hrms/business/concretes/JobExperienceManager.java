@@ -29,6 +29,9 @@ public class JobExperienceManager implements JobExperienceService {
 
 	@Override
 	public Result add(JobExperience jobExperience) {
+		if (jobExperience.getFinishYear().equals("")) {
+			jobExperience.setFinishYear("Devam ediyor");
+		}
 		this.jobExperienceDao.save(jobExperience);
 		return new SuccessResult("Eklendi");
 	}
@@ -36,6 +39,14 @@ public class JobExperienceManager implements JobExperienceService {
 	@Override
 	public DataResult<List<JobExperience>> getAll() {
 		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findAll(),"Data Listelendi");
+	}
+
+
+
+	@Override
+	public DataResult<List<JobExperience>> getAllOrderByFinishYearDesc() {
+		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.getOrderByFinishYearDesc(),"Data Listelendi");
+		
 	}
 
 }

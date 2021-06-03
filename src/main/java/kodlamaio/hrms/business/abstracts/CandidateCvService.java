@@ -15,7 +15,7 @@ public interface CandidateCvService {
 	DataResult<List<CandidateCv>> findAll();
 	Result add(CandidateCv candidateCv);
 	
-	DataResult<List<CandidateCvDto>> getAllDto(int id);
+	//DataResult<List<CandidateCvDto>> getAllDto(int id);
 	
 	DataResult<List<CandidateCv>> getByCandidateId(int id);
 

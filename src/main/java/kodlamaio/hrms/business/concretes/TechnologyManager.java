@@ -27,7 +27,7 @@ public class TechnologyManager implements TechnologyService{
 
 	@Override
 	public Result add(Technology technology) {
-		if (technologyDao.existsByTechnologyId(technology) && technologyDao.existsByCvId(technology.getCvId())) {
+		if (technologyDao.existsByTechnologyIdAndCvId(technology.getTechnologyId(), technology.getCvId())) {
 			return new ErrorResult("Aynı Teknolojiyi Tekrar Ekleyemezsiniz");
 			
 		}

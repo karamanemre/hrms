@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.axis.types.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -16,46 +15,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.TechnologyService;
+import kodlamaio.hrms.business.abstracts.SchoolSectionService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
-import kodlamaio.hrms.entities.concretes.Languages;
-import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.concretes.SchoolSection;
 
 @RestController
-@RequestMapping("/api/technology")
-public class TechnologyController {
+@RequestMapping("api/schoolsection")
+public class SchoolSectionController {
 	
-	private TechnologyService technologyService;
+	private SchoolSectionService schoolSectionService;
 	private ValidationException validationException;
 	
 	@Autowired
-	public TechnologyController(TechnologyService technologyService,ValidationException validationException) {
+	public SchoolSectionController(SchoolSectionService schoolSectionService,ValidationException validationException) {
 		super();
-		this.technologyService = technologyService;
-		this.validationException=validationException;
+		this.schoolSectionService = schoolSectionService;
+		this.validationException = validationException;
 	}
-	
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody Technology technology) {
-		return this.technologyService.add(technology);
+	public Result add(@Valid @RequestBody SchoolSection schoolSection) {
+		return this.schoolSectionService.add(schoolSection);
 	}
-
+	
 	@GetMapping("/getAll")
-	public DataResult<List<Technology>> getAll() {
-		return this.technologyService.getAll();
+	public DataResult<List<SchoolSection>> getAll() {
+		return this.schoolSectionService.getAll();
 	}
 	
 	
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ErrorDataResult<Object> validation(MethodArgumentNotValidException exceptions) {
 		return validationException.handleValidationException(exceptions);
 	}
-	
+
 	
 }
