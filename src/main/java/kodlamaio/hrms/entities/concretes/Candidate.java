@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
 public class Candidate extends Users {
 		
 	@NotBlank(message = "İsim Alanı Boş Olamaz")
@@ -56,12 +56,28 @@ public class Candidate extends Users {
 	@Column(name = "birth_year")
 	private String dateOfBirth;
 	
-	@OneToMany(mappedBy="candidateId")
-	private List<CandidateCv> candidateCv;
 	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<JobExperience> jobExperiences;
 	
-	//@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
-	//private List<CandidateCv> candidateCv;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<Languages> languages;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<School> schools;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<Technology> technology;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<ProgrammingLanguage> programmingLanguage;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<SocialMedia> socialMedia;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
+	private List<CoverLetter> coverLetter;
+	
 	
 	    
 	   

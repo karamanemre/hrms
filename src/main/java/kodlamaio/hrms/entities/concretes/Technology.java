@@ -33,18 +33,18 @@ public class Technology {
 	private int id;
 	
 	@NotNull
-	@Column(name = "cv_id")
-	private int cvId;
+	@Column(name = "candidate_id")
+	private int candidateNumber;
 	
 	@NotNull
 	@Column(name = "technology_id")
 	private int technologyId;
 	
 	
-	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cv_id",insertable = false, updatable = false)
+	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
 	@JsonIgnore
-    private CandidateCv candidateCv;
+    private Candidate candidateId; 
 	
 	
 	@ManyToOne(targetEntity = TechnologyNameList.class, fetch = FetchType.EAGER)

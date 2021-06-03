@@ -50,13 +50,13 @@ public class Languages {
 	private int languageLevel;
 	
 	@NotNull
-	@Column(name = "cv_id") //null hatasını etkisiz kılmak için cvid girişi yapılmalı ve jsoncolumn verilerine dikkat!!
-	private int cvId;       
+	@Column(name = "candidate_id") 
+	private int candidateNumber;       
 	
-	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cv_id",insertable = false, updatable = false)
+	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
 	@JsonIgnore
-    private CandidateCv candidateCv;
+    private Candidate candidateId;
 	
 	@ManyToOne(targetEntity = LanguageNameList.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "language_name",insertable = false, updatable = false)

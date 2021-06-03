@@ -1,7 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
-
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -25,52 +26,31 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper=false)
 @Entity
+@Table(name = "cover_letter")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "schools")
+@NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateId"})
-public class School {
-	
+public class CoverLetter {
 	
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "starting_year")
-	private Date startingYear;
-	
-	@Column(name = "finish_year")
-	private String finishYear;
-	
 	@NotNull
 	@Column(name = "candidate_id")
 	private int candidateNumber;
 	
-	@NotNull
-	@Column(name = "school_name")
-	private int schoolId;
-	
-	@NotNull
-	@Column(name = "section")
-	private int schoolSectionId;
-	
+	@NotBlank(message = "Boş geçilemez")
+	@Column(name = "cover_letter_text")
+	private String coverLetter;
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
 	@JsonIgnore
     private Candidate candidateId;
 	
-	@ManyToOne(targetEntity = SchoolNameList.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "school_name",insertable = false, updatable = false)
-	@JsonIgnore
-    private SchoolNameList schoolNameList;
 	
-	@ManyToOne(targetEntity = SchoolSection.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "section",insertable = false, updatable = false)
-	@JsonIgnore
-    private SchoolSection schoollSection;
-	
+
 }

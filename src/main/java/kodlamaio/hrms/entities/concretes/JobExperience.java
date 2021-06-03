@@ -54,12 +54,12 @@ public class JobExperience {
 	private String finishYear;
 	
 	@NotNull
-	@Column(name = "cv_id")
-	private int cvId;
+	@Column(name = "candidate_id")
+	private int candidateNumber;
 	
-	@ManyToOne(targetEntity = CandidateCv.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "cv_id",insertable = false, updatable = false)
+	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
 	@JsonIgnore
-    private CandidateCv candidateCv;
+    private Candidate candidateId;
 	
 }

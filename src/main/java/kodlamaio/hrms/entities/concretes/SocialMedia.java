@@ -1,6 +1,5 @@
 package kodlamaio.hrms.entities.concretes;
 
-
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -28,10 +27,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "schools")
+@Table(name = "social_media_link")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateId"})
-public class School {
-	
+public class SocialMedia {
 	
 	@Id
 	@Column(name = "id")
@@ -39,38 +37,24 @@ public class School {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "starting_year")
-	private Date startingYear;
+	@Column(name = "linkedin")
+	private String linkedin;
 	
-	@Column(name = "finish_year")
-	private String finishYear;
+	@NotBlank(message="Boş Geçilemez")
+	@Column(name = "github")
+	private String github;
 	
 	@NotNull
 	@Column(name = "candidate_id")
 	private int candidateNumber;
-	
-	@NotNull
-	@Column(name = "school_name")
-	private int schoolId;
-	
-	@NotNull
-	@Column(name = "section")
-	private int schoolSectionId;
-	
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
 	@JsonIgnore
     private Candidate candidateId;
 	
-	@ManyToOne(targetEntity = SchoolNameList.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "school_name",insertable = false, updatable = false)
-	@JsonIgnore
-    private SchoolNameList schoolNameList;
 	
-	@ManyToOne(targetEntity = SchoolSection.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "section",insertable = false, updatable = false)
-	@JsonIgnore
-    private SchoolSection schoollSection;
+	
+	
 	
 }

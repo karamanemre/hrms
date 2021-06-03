@@ -15,47 +15,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.abstracts.CandidateCvService;
+import kodlamaio.hrms.business.abstracts.ProgrammingLanguageService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
-import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.entities.concretes.CandidateCv;
-import kodlamaio.hrms.entities.dtos.CandidateCvDto;
-
+import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
 
 @RestController
-@RequestMapping("/api/candidatecv")
-public class CandidateCvControllers {
+@RequestMapping("api/programminglanguage")
+public class ProgrammingLanguageControllers {
 	
-	private CandidateCvService candidateCvService;
+	private ProgrammingLanguageService programmingLanguageService;
 	private ValidationException validationException;
 	
 	@Autowired
-	public CandidateCvControllers(CandidateCvService candidateCvService,ValidationException validationException) {
-		this.candidateCvService = candidateCvService;
+	public ProgrammingLanguageControllers(ProgrammingLanguageService programmingLanguageService, ValidationException validationException) {
+		super();
+		this.programmingLanguageService = programmingLanguageService;
 		this.validationException=validationException;
 	}
 	
-	@GetMapping("/getAll")
-	public DataResult<List<CandidateCv>> findAll(){
-		return this.candidateCvService.findAll();
-	}
-	
-	/*@GetMapping("/getallDtoo")
-	public DataResult<List<CandidateCvDto>> getAllDto(int id){
-		return this.candidateCvService.getAllDto(id);
-	}*/
-	
-	@GetMapping("/getAllCandidateId")
-	public DataResult<List<CandidateCv>> getAllCandidateId(int id){
-		return this.candidateCvService.getByCandidateId(id);
-	}
-	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody CandidateCv candidateCv){
-		return this.candidateCvService.add(candidateCv);
+	public Result add(@Valid @RequestBody ProgrammingLanguage programmingLanguage) {
+		return this.programmingLanguageService.add(programmingLanguage);
+	}
+	
+	@GetMapping("/getAll")
+	public DataResult<List<ProgrammingLanguage>> getAll() {
+		return this.programmingLanguageService.getAll();
 	}
 	
 	
@@ -65,8 +53,5 @@ public class CandidateCvControllers {
 	public ErrorDataResult<Object> validation(MethodArgumentNotValidException exceptions) {
 		return validationException.handleValidationException(exceptions);
 	}
-	
-	
-	
 	
 }

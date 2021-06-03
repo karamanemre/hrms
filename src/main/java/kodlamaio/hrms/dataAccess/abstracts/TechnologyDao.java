@@ -9,5 +9,5 @@ import kodlamaio.hrms.entities.concretes.Technology;
 
 public interface TechnologyDao extends JpaRepository<Technology, Integer> {
 	
-	boolean existsByTechnologyIdAndCvId(int technologyId,int cvId);
+	boolean existsByTechnologyIdAndCandidateNumber(int technologyId,int cvId);
 }
