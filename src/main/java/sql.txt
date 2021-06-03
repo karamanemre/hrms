@@ -3,19 +3,6 @@
 BEGIN;
 
 
-CREATE TABLE public.candidate_cv
-(
-    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 384897 CACHE 1 ),
-    candidate_id integer NOT NULL,
-    photo_link character varying NOT NULL,
-    linkedin_link character varying NOT NULL,
-    github_link character varying NOT NULL,
-    description text NOT NULL,
-    creadet_date date,
-    is_active boolean,
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE public.candidates
 (
     user_id integer NOT NULL,
@@ -30,6 +17,14 @@ CREATE TABLE public.city
 (
     id integer NOT NULL,
     city_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.cover_letter
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 35467845 CACHE 1 ),
+    candidate_id integer NOT NULL,
+    cover_letter_text text NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -55,7 +50,7 @@ CREATE TABLE public.job_experience
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 32546584 CACHE 1 ),
     company_name character varying NOT NULL,
     position_name integer NOT NULL,
-    cv_id integer NOT NULL,
+    candidate_id integer,
     starting_year date NOT NULL,
     finish_year character varying,
     PRIMARY KEY (id)
@@ -87,9 +82,9 @@ CREATE TABLE public.language_name_list
 CREATE TABLE public.languages
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 3546564 CACHE 1 ),
-    cv_id integer NOT NULL,
-    language_name integer,
-    language_level integer,
+    candidate_id integer NOT NULL,
+    language_name integer NOT NULL,
+    language_level integer NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -97,6 +92,21 @@ CREATE TABLE public.positions
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3854567 CACHE 1 ),
     position_name character varying NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.programming_language
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3548454 CACHE 1 ),
+    candidate_id integer NOT NULL,
+    programming_language_id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE public.programming_language_name_list
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 5 MINVALUE 1 MAXVALUE 35412586 CACHE 1 ),
+    programming_language_name character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -117,7 +127,7 @@ CREATE TABLE public.school_section
 CREATE TABLE public.schools
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 4 MINVALUE 1 MAXVALUE 3543652 CACHE 1 ),
-    cv_id integer NOT NULL,
+    candidate_id integer NOT NULL,
     school_name integer NOT NULL,
     section integer NOT NULL,
     starting_year date NOT NULL,
@@ -125,10 +135,19 @@ CREATE TABLE public.schools
     PRIMARY KEY (id)
 );
 
+CREATE TABLE public.social_media_link
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3486521 CACHE 1 ),
+    linkedin character varying NOT NULL,
+    github character varying NOT NULL,
+    candidate_id integer NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE public.technology
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 5 MINVALUE 1 MAXVALUE 354684 CACHE 1 ),
-    cv_id integer NOT NULL,
+    candidate_id integer NOT NULL,
     technology_id integer NOT NULL,
     PRIMARY KEY (id)
 );
@@ -160,15 +179,15 @@ CREATE TABLE public.users_verify
     PRIMARY KEY (id)
 );
 
-ALTER TABLE public.candidate_cv
-    ADD FOREIGN KEY (candidate_id)
-    REFERENCES public.candidates (user_id)
-    NOT VALID;
-
-
 ALTER TABLE public.candidates
     ADD FOREIGN KEY (user_id)
     REFERENCES public.users (id)
+    NOT VALID;
+
+
+ALTER TABLE public.cover_letter
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
     NOT VALID;
 
 
@@ -185,8 +204,8 @@ ALTER TABLE public.employess
 
 
 ALTER TABLE public.job_experience
-    ADD FOREIGN KEY (cv_id)
-    REFERENCES public.candidate_cv (id)
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
     NOT VALID;
 
 
@@ -209,8 +228,8 @@ ALTER TABLE public.job_postings
 
 
 ALTER TABLE public.languages
-    ADD FOREIGN KEY (cv_id)
-    REFERENCES public.candidate_cv (id)
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
     NOT VALID;
 
 
@@ -220,9 +239,21 @@ ALTER TABLE public.languages
     NOT VALID;
 
 
+ALTER TABLE public.programming_language
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
+    NOT VALID;
+
+
+ALTER TABLE public.programming_language
+    ADD FOREIGN KEY (programming_language_id)
+    REFERENCES public.programming_language_name_list (id)
+    NOT VALID;
+
+
 ALTER TABLE public.schools
-    ADD FOREIGN KEY (cv_id)
-    REFERENCES public.candidate_cv (id)
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
     NOT VALID;
 
 
@@ -238,9 +269,15 @@ ALTER TABLE public.schools
     NOT VALID;
 
 
+ALTER TABLE public.social_media_link
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
+    NOT VALID;
+
+
 ALTER TABLE public.technology
-    ADD FOREIGN KEY (cv_id)
-    REFERENCES public.candidate_cv (id)
+    ADD FOREIGN KEY (candidate_id)
+    REFERENCES public.candidates (user_id)
     NOT VALID;
 
 
