@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "languages")
+@Table(name = "language_name_list")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateCv"})
 public class LanguageNameList {
 	
@@ -34,8 +34,8 @@ public class LanguageNameList {
 	private int id;
 	
 	@NotBlank(message="Boş Geçilemez")
-	@Column(name = "language_name")
-	private int languageName;
+	@Column(name = "name")
+	private String languageName;
 	
 	@OneToMany(mappedBy = "languageNameList")
 	private List<Languages> languages;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.adapters.CustomerCheckService;
-import kodlamaio.hrms.core.emails.EmailRules;
+
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorResult;
 import kodlamaio.hrms.core.utilities.Result;
@@ -16,6 +16,8 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.concretes.CandidatePhoto;
+import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 
 @Service
 public class CandidateManager implements CandidateService{
@@ -69,5 +71,15 @@ public class CandidateManager implements CandidateService{
 		
 		
 	}
-	
+
+	@Override
+	public DataResult<CandidatePhoto> getById(int id) {
+		return new SuccessDataResult<CandidatePhoto>(this.candidateDao.findByUserId(id),"Data Listelendi");
+	}
+
+	@Override
+	public DataResult<List<CandidateCvDto>> getAllCv() {
+		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateDao.getAllCv(),"Data Listelendi");
+	}
+
 }

@@ -24,6 +24,7 @@ import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 
 
 @RestController
@@ -42,7 +43,12 @@ public class CandidateController {
 	
 	@GetMapping("/getall")
 	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll();
+		return this.candidateService.getAll(); 
+	}
+	
+	@GetMapping("/getallcv")
+	public DataResult<List<CandidateCvDto>> getAllCv(){
+		return this.candidateService.getAllCv();
 	}
 	
 	
