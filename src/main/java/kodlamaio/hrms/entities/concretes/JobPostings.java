@@ -48,7 +48,7 @@ public class JobPostings {
 	@Column(name = "max_salary")
 	private double maxSalary;
 	
-	@NotBlank(message = "Açık Pozisyon Sayısı Alanı Boş Bırakılamaz")
+	@NotBlank(message = "Açık Pozisyon Sayısı Alanı  Boş Bırakılamaz")
 	@Column(name = "number_of_open_positions")
 	private String numberOfOpenPosition;
 	
