@@ -48,7 +48,6 @@ public class CoverLetter {
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	@JsonIgnore
     private Candidate candidateId;
 	
 	

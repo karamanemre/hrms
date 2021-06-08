@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.SchoolNameList;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/schoolNameList")
 public class SchoolNameListController {

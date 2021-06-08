@@ -41,49 +41,52 @@ public class Candidate extends Users {
 	
 	
 	@NotBlank(message = "İsim Alanı Boş Olamaz")
-	@NotNull
 	@Column(name = "first_name")
 	private String firstName;
 	
 	@NotBlank(message = "Soyisim Alanı Boş Olamaz")
-	@NotNull
 	@Column(name = "last_name")
 	private String lastName;
 	
 	@NotBlank(message = "Tc Kimlik No Alanı Boş Olamaz")
-	@NotNull
 	@Column(name = "national_id")
 	@Size(min = 11, max = 11, message = "Tc kimlik numarası 11 haneli olmalıdır")
 	@Pattern(regexp = "(^[1-9][0-9]*$)|(^\\d{10}$)", message = "Tc kimlik numarası 0 ile başlayamaz veya metin içeremez.")
 	private String nationalId;
 	
 	@NotBlank(message = "Doğum Yılı Alanı Boş Olamaz")
-	@NotNull
 	@Column(name = "birth_year")
 	private String dateOfBirth;
 	
-	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<JobExperience> jobExperiences;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<Languages> languages;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<School> schools;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<Technology> technology;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<ProgrammingLanguage> programmingLanguage;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<SocialMedia> socialMedia;
+	
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<CoverLetter> coverLetter;
 	
+
 	@OneToMany(mappedBy = "candidate")
 	@JsonIgnore()
 	private List<CandidatePhoto> candidatePhotos;

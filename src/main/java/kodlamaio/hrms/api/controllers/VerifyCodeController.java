@@ -1,5 +1,6 @@
 package kodlamaio.hrms.api.controllers;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import kodlamaio.hrms.business.abstracts.VerifyCodeService;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.VerifyCode;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/valid")
 public class VerifyCodeController {

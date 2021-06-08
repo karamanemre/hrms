@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
@@ -29,22 +30,19 @@ import lombok.NoArgsConstructor;
 public class Employers extends Users{
 	
 	@NotBlank(message = "Şirket İsmi Alanı Boş Olamaz")
-	@NotNull
 	@Column(name = "company_name")
     private String companyName;
 	
 	@NotBlank(message = "Web Site Alanı Boş Olamaz")
-	@NotNull
     @Column(name = "website")
     private String webSite;
 	
 	@NotBlank(message = "Telefon Numarası Alanı Boş Olamaz")
-	@NotNull
-	@Pattern(regexp ="[0-9\\s]{12}",message = "Hatalı Telefon numarası")
+	@Pattern(regexp ="[0-9\\s]{11}",message = "Hatalı Telefon numarası")
     @Column(name = "phone_number")
     private String phoneNumber;
     
-   
+	@JsonIgnore
     @OneToMany(mappedBy = "employer")
 	private List<JobPostings> jobPostings;
 	

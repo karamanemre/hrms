@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
@@ -36,7 +37,7 @@ public class JobPositions{
 	@Column(name="position_name")
 	private String positionName;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "jobPosition")
 	private List<JobPostings> jobPostings;
 	

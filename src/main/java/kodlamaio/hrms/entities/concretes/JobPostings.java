@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ import lombok.Data;
 public class JobPostings {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	
@@ -48,17 +49,18 @@ public class JobPostings {
 	private double maxSalary;
 	
 	@NotBlank(message = "Açık Pozisyon Sayısı Alanı Boş Bırakılamaz")
-	@NotNull
 	@Column(name = "number_of_open_positions")
 	private String numberOfOpenPosition;
 	
 	@NotBlank(message = "Son Başvuru Tarihi Alanı Boş Bırakılamaz")
-	@NotNull
 	@Column(name = "application_deadline")
 	private String applicaitonDeadline;
 	
 	@Column(name = "is_active")
 	private boolean isActive;
+	
+	@Column(name = "city_id")
+	private int cityId;
 	
 	@Column(name = "release_date", columnDefinition = "Date default CURRENT_DATE")
 	@JsonIgnore
@@ -67,13 +69,15 @@ public class JobPostings {
 	@ManyToOne()
     @JoinColumn(name = "job_position_id")
     private JobPositions jobPosition;
-
+	
     @ManyToOne
     @JoinColumn(name = "employer_id")
     private Employers employer;
+    
 
-    @ManyToOne()
-    @JoinColumn(name = "city_id")
+    @ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "city_id",insertable = false, updatable = false)
+    @JsonIgnore
     private City city;
 	
 	

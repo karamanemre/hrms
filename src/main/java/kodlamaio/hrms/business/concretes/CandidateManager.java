@@ -72,10 +72,7 @@ public class CandidateManager implements CandidateService{
 		
 	}
 
-	@Override
-	public DataResult<CandidatePhoto> getById(int id) {
-		return new SuccessDataResult<CandidatePhoto>(this.candidateDao.findByUserId(id),"Data Listelendi");
-	}
+	
 
 	@Override
 	public DataResult<List<CandidateCvDto>> getAllCv() {

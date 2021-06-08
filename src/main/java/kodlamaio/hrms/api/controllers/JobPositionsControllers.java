@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.jca.cci.RecordTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,21 +23,25 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.dataAccess.abstracts.JobPositionsDao;
 import kodlamaio.hrms.entities.concretes.JobPositions;
 
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/jobpositions")
 public class JobPositionsControllers {
 	
 	private JobPositionsService jobPositionsService;
 	private ValidationException validationException;
+	private JobPositionsDao jobPositionsDao;
 	
 	
 	@Autowired
-	public JobPositionsControllers(JobPositionsService jobPositions,ValidationException validationException) {
+	public JobPositionsControllers(JobPositionsService jobPositions,JobPositionsDao jobPositionsDao,ValidationException validationException) {
 		this.jobPositionsService = jobPositions; 
 		this.validationException=validationException;
+		this.jobPositionsDao=jobPositionsDao;
 	}
 	
 	
@@ -45,7 +51,10 @@ public class JobPositionsControllers {
 	}
 	
 	@GetMapping("/getByName")
-	public DataResult<JobPositions> getByName(@RequestBody String positionName){
+	public DataResult<JobPositions> getByName(String positionName){
+		if (positionName.equals("") || !jobPositionsDao.existsByPositionName(positionName)) {
+			return new ErrorDataResult<JobPositions>("Böyle bir kayıt yok");
+		}
 		return this.jobPositionsService.findByPositionName(positionName);
 	}
 	

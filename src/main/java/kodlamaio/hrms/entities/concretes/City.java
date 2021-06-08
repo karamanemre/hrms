@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
@@ -31,11 +33,12 @@ public class City {
     @Column(name = "id")
     private int id;
 	
-	@NotBlank(message = "Şehir İsmi Alanı Bo Olamaz")
+	@NotBlank(message = "Şehir İsmi Alanı Boş Olamaz")
 	@NotNull
 	@Column(name = "city_name")
 	private String city;
-
-	@OneToMany(mappedBy = "city")
+	
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "city")
 	private List<JobPostings> jobPostings;
 }

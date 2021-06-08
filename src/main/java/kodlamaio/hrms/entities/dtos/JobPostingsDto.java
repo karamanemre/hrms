@@ -13,6 +13,7 @@ public class JobPostingsDto {
 	
 	private String companyName;
 	
+	private String jobPosition;	
 	private String numberOfOpenPosition;
 	
 	private String applicaitonDeadline;
