@@ -40,16 +40,13 @@ public class Technology {
 	@Column(name = "technology_id")
 	private int technologyId;
 	
-	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	@JsonIgnore
     private Candidate candidateId; 
 	
 	
 	@ManyToOne(targetEntity = TechnologyNameList.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "technology_id",insertable = false, updatable = false)
-	@JsonIgnore
 	private TechnologyNameList technologyNameList;
 	
 

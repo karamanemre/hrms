@@ -1,6 +1,5 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -36,7 +35,6 @@ public class JobPostings {
 	
 	
 	@NotBlank(message = "Açıklama Alanı Boş Bırakılamaz")
-	@NotNull
 	@Column(name = "description")
 	private String description;
 	
@@ -59,23 +57,37 @@ public class JobPostings {
 	@Column(name = "is_active")
 	private boolean isActive;
 	
-	@Column(name = "city_id")
-	private int cityId;
+	@Column(name = "workplace")
+	private String workplace;
+	
+	@Column(name = "type_of_work")
+	private String typeOfWork;
 	
 	@Column(name = "release_date", columnDefinition = "Date default CURRENT_DATE")
 	@JsonIgnore
 	private LocalDate releaseDate = LocalDate.now();
 	
-	@ManyToOne()
-    @JoinColumn(name = "job_position_id")
+	@Column(name = "city_id")
+	private int cityId;
+	
+	@Column(name = "job_position_id")
+	private int jobPositionId;
+	
+	@Column(name = "employer_id")
+	private int employerId;
+	
+	@ManyToOne(targetEntity = JobPositions.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "job_position_id",insertable = false, updatable = false)
+	@JsonIgnore
     private JobPositions jobPosition;
 	
-    @ManyToOne
-    @JoinColumn(name = "employer_id")
+	@ManyToOne(targetEntity = Employers.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "employer_id",insertable = false, updatable = false)
+	@JsonIgnore
     private Employers employer;
     
 
-    @ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = City.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "city_id",insertable = false, updatable = false)
     @JsonIgnore
     private City city;

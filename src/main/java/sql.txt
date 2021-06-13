@@ -57,16 +57,16 @@ CREATE TABLE public.job_experience
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 32546584 CACHE 1 ),
     company_name character varying NOT NULL,
-    position_name integer NOT NULL,
-    candidate_id integer,
+    candidate_id integer NOT NULL,
     starting_year date NOT NULL,
-    finish_year character varying,
+    position_name character varying NOT NULL,
+    finish_year date,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.job_postings
 (
-    id integer NOT NULL,
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 2 MINVALUE 1 MAXVALUE 3574855 CACHE 1 ),
     employer_id integer NOT NULL,
     job_position_id integer NOT NULL,
     description text NOT NULL,
@@ -77,6 +77,8 @@ CREATE TABLE public.job_postings
     max_salary double precision,
     application_deadline character varying NOT NULL,
     release_date date NOT NULL,
+    workplace character varying,
+    type_of_work character varying,
     PRIMARY KEY (id)
 );
 

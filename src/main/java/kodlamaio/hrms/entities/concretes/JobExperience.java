@@ -44,14 +44,14 @@ public class JobExperience {
 	
 	@NotNull
 	@Column(name = "position_name")
-	private int positionName;
+	private String positionName;
 	
 	@NotNull
 	@Column(name = "starting_year")
 	private Date startingYear;
 	
 	@Column(name = "finish_year")
-	private String finishYear;
+	private Date finishYear;
 	
 	@NotNull
 	@Column(name = "candidate_id")
@@ -59,7 +59,6 @@ public class JobExperience {
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	@JsonIgnore
     private Candidate candidateId;
 	
 }

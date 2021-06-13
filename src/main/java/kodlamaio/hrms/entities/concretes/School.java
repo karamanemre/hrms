@@ -60,17 +60,14 @@ public class School {
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	@JsonIgnore
     private Candidate candidateId;
 	
 	@ManyToOne(targetEntity = SchoolNameList.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "school_name",insertable = false, updatable = false)
-	@JsonIgnore
     private SchoolNameList schoolNameList;
 	
 	@ManyToOne(targetEntity = SchoolSection.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "section",insertable = false, updatable = false)
-	@JsonIgnore
     private SchoolSection schoollSection;
 	
 }

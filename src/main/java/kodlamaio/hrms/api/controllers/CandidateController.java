@@ -4,11 +4,10 @@ package kodlamaio.hrms.api.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,20 +42,20 @@ public class CandidateController {
 	}
 	
 	@GetMapping("/getall")
-	public DataResult<List<Candidate>> getAll(){
-		return this.candidateService.getAll(); 
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(this.candidateService.getAll()); 
 	}
 	
-	@GetMapping("/getallcv")
-	public DataResult<List<CandidateCvDto>> getAllCv(){
-		return this.candidateService.getAllCv();
-	}
-	
+//	@GetMapping("/getallcv")
+//	public DataResult<List<CandidateCvDto>> getAllCv(){
+//		return this.candidateService.getAllCv();
+//	}
+//	
 	
 	
 	@PostMapping("/add")
-	public Result add(@Valid @RequestBody Candidate candidate) {
-		return this.candidateService.add(candidate);
+	public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
+		return ResponseEntity.ok(this.candidateService.add(candidate));
 	}
 	
 	

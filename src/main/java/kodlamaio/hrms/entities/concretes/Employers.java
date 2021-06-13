@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -43,7 +44,7 @@ public class Employers extends Users{
     private String phoneNumber;
     
 	@JsonIgnore
-    @OneToMany(mappedBy = "employer")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "employer")
 	private List<JobPostings> jobPostings;
 	
 

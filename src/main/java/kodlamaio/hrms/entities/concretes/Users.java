@@ -41,7 +41,7 @@ public class Users {
     private String email;
     
 	
-	@Pattern(regexp = "^(?=.*\\d).{4,8}$", flags = Flag.UNICODE_CASE,message = "Şifreniz küçük harf,büyük harf,sembol ve rakam içermelidir")
+	@Pattern(regexp = "^(?=.*\\d).{4,16}$", flags = Flag.UNICODE_CASE,message = "Şifreniz küçük harf,büyük harf,sembol ve rakam içermelidir.En az 4 en fazla 16 karakter olmalıdır")
 	@NotBlank(message="Password Alanı Boş olamaz")
     @Column(name = "password")
     private String password;
@@ -55,9 +55,6 @@ public class Users {
 	@Column(name="verify")
 	private boolean verify = false;
     
-	
-	
-	
 	
 
 }

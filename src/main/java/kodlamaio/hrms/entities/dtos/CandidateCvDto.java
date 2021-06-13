@@ -20,19 +20,19 @@ public class CandidateCvDto {
 	
 	
 	
-	private String firstName;
-	private String lastName;
-	private String schoolName;
-	private String schoolSection;
-	private String languageName;
-	private int languageLevel;
-	
-	private String companyName;
-	//private Date startingYear;
-	private String finishYear;
-	private String linkedinAdress;
-	private String githubAdress;
-	private String coverLetter;
+//	private String firstName;
+//	private String lastName;
+//	private String schoolName;
+//	private String schoolSection;
+//	private String languageName;
+//	private int languageLevel;
+//	
+//	private String companyName;
+//	private Date startingYear;
+//	private Date finishYear;
+//	private String linkedinAdress;
+//	private String githubAdress;
+//	private String coverLetter;
 
 	
 	

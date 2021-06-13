@@ -66,7 +66,7 @@ public class Candidate extends Users {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<Languages> languages;
 	
-	@JsonIgnore
+
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<School> schools;
 	
@@ -74,11 +74,10 @@ public class Candidate extends Users {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<Technology> technology;
 	
-	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<ProgrammingLanguage> programmingLanguage;
 	
-	@JsonIgnore
+	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
 	private List<SocialMedia> socialMedia;
 	

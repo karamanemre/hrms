@@ -20,6 +20,8 @@ public class JobPostingsDto {
 	
 	private LocalDate releaseDate;
 	
+	private String description;
+	
 	
 
 }
