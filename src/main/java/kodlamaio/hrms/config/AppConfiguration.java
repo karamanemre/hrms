@@ -13,12 +13,6 @@ import springfox.documentation.swagger2.mappers.ModelMapper;
 @Configuration
 public class AppConfiguration {
 	
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper() {
-		};
-	}
-	
 	
     public Cloudinary cloudinaryService(){
         return new Cloudinary(ObjectUtils.asMap(

@@ -13,8 +13,11 @@ public interface JobPostingService {
 	DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool);
 	Result toggleActiveStatus(int id);
 	DataResult<List<JobPostingsDto>> getAll();
-	
 	DataResult<List<JobPostingsDto>> getAllByIsActive(boolean isActive );
+	
+	DataResult<List<JobPostingsDto>> getAllByIsConfirmation();
+	
+	Result isConfirmation(int employerId); 
 	
 	
 	

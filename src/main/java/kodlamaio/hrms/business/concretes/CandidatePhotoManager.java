@@ -22,14 +22,14 @@ public class CandidatePhotoManager implements CandidatePhotoService {
 	
 	private CandidatePhotoDao candidatePhotoDao;
 	private ImageService imageService;
-	private ModelMapper modelMapper;
+	
 	
 	@Autowired
-	public CandidatePhotoManager(CandidatePhotoDao candidatePhotoDao, ImageService imageService, ModelMapper modelMapper) {
+	public CandidatePhotoManager(CandidatePhotoDao candidatePhotoDao, ImageService imageService) {
 		super();
 		this.candidatePhotoDao = candidatePhotoDao;
 		this.imageService = imageService;
-		this.modelMapper = modelMapper;
+		
 	}
 
 	@Override

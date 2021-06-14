@@ -10,7 +10,9 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.concretes.VerifyCode;
 import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 @CrossOrigin
@@ -79,8 +82,16 @@ public class JobPostingController {
 	       return this.jobPostingService.getAllByIsActive(isActive);
 	    }
 	
+	@GetMapping("/getAllByIsConfirmation")
+	public DataResult<List<JobPostingsDto>> getAllByIsConfirmation() {
+		return this.jobPostingService.getAllByIsConfirmation();
+	}
 	
-	
+
+	@PutMapping("isConfirmation")
+	public Result update(@RequestParam int id) {
+		return this.jobPostingService.isConfirmation( id);
+	}
 	
 	
 

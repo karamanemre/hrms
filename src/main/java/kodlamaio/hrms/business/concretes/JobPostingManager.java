@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobPostingsDao;
+import kodlamaio.hrms.entities.concretes.Employers;
 import kodlamaio.hrms.entities.concretes.JobPostings;
+import kodlamaio.hrms.entities.concretes.Users;
 import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 
 @Service
@@ -68,6 +71,25 @@ public class JobPostingManager implements JobPostingService{
 	@Override
 	public DataResult<List<JobPostingsDto>> getAllByIsActive(boolean isActive) {
 		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAllByIsActive(isActive));
+	}
+
+
+	@Override
+	public DataResult<List<JobPostingsDto>> getAllByIsConfirmation() {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAllByIsConfirmation());
+	}
+
+
+	@Override
+	public Result isConfirmation(int id) {
+		JobPostings jobPostingsId = jobPostingDao.getById(id);
+		if (!jobPostingsId.isConfirmation()) {
+			jobPostingsId.setConfirmation(true);
+		}else {
+			jobPostingsId.setConfirmation(false);
+		}
+		jobPostingDao.save(jobPostingsId);
+		return new SuccessResult("Başarıyla Onaylandı");	
 	}
 
 	

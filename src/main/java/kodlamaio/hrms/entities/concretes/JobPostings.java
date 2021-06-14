@@ -54,11 +54,17 @@ public class JobPostings {
 	@Column(name = "application_deadline")
 	private String applicaitonDeadline;
 	
+	@JsonIgnore
 	@Column(name = "is_active")
-	private boolean isActive;
+	private boolean isActive=true;
 	
+	@NotBlank(message = "Çalışma Yeri Alanı Boş Bırakılamaz")
 	@Column(name = "workplace")
 	private String workplace;
+	
+	@JsonIgnore
+	@Column(name = "is_confirmation")
+	private boolean isConfirmation=false;
 	
 	@Column(name = "type_of_work")
 	private String typeOfWork;
