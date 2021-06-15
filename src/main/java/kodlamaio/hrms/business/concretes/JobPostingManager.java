@@ -78,7 +78,12 @@ public class JobPostingManager implements JobPostingService{
 	public DataResult<List<JobPostingsDto>> getAllByIsConfirmation() {
 		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAllByIsConfirmation());
 	}
-
+	
+	
+	@Override
+	public JobPostings getById(int id) {
+		return this.jobPostingDao.getById(id);
+	}
 
 	@Override
 	public Result isConfirmation(int id) {
@@ -91,6 +96,15 @@ public class JobPostingManager implements JobPostingService{
 		jobPostingDao.save(jobPostingsId);
 		return new SuccessResult("Başarıyla Onaylandı");	
 	}
+
+
+	@Override
+	public DataResult<List<JobPostings>> getByIsConfirmationFalse() {
+		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsConfirmationFalse(),"Data Listelendi");
+	}
+
+
+	
 
 	
 

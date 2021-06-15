@@ -77,6 +77,11 @@ public class JobPostingController {
 	       return this.jobPostingService.getAll();
 	    }
 	
+	@GetMapping("/getById")
+	public JobPostings getById(int id) {
+	       return this.jobPostingService.getById(id);
+	    }
+	
 	@GetMapping("/getAllByIsActive")
 	public Result getAllByIsActiveOrderByCreatedDate(boolean isActive ) {
 	       return this.jobPostingService.getAllByIsActive(isActive);
@@ -85,6 +90,11 @@ public class JobPostingController {
 	@GetMapping("/getAllByIsConfirmation")
 	public DataResult<List<JobPostingsDto>> getAllByIsConfirmation() {
 		return this.jobPostingService.getAllByIsConfirmation();
+	}
+	
+	@GetMapping("/getAllByIsConfirmationFalse")
+	public DataResult<List<JobPostings>> getByIsConfirmationFalse() {
+		return this.jobPostingService.getByIsConfirmationFalse();
 	}
 	
 

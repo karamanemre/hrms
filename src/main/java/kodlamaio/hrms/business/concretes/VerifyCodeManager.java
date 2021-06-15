@@ -56,7 +56,6 @@ public class VerifyCodeManager implements VerifyCodeService{
 		if (this.verifyCodeDao.getOne(newVerifyCode.getId()).isConfirmed()) {
 			return new ErrorResult("Doğrulama işlemi daha önce yapıldı");
 		}
-		
 		LocalDate e = (LocalDate.now());
 		newVerifyCode.setConfirmed(true);
 		newVerifyCode.setConfirmedDate(Date.valueOf(e));
