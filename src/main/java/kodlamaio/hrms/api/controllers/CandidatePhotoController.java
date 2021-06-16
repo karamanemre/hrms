@@ -40,7 +40,6 @@ public class CandidatePhotoController {
 		Candidate candidate = new Candidate();
 		candidate.setUserId(candidateId);
 		candidatePhoto.setCandidate(candidate);
-		candidatePhoto.setUrl("url");
 		return ResponseEntity.ok(this.candidatePhotoService.add(candidatePhoto, file));
 	}
 	

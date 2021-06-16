@@ -6,4 +6,6 @@ import kodlamaio.hrms.entities.concretes.CandidatePhoto;
 
 public interface CandidatePhotoDao extends JpaRepository<CandidatePhoto, Integer> {
 	
+	
+	
 }

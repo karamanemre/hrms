@@ -22,6 +22,9 @@ public class JobPostingsDto {
 	
 	private String description;
 	private boolean isConfirmation;
+	private String workplace;
+	private String typeOfWork;
+
 	
 	
 

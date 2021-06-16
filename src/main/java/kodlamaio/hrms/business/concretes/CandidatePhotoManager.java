@@ -31,15 +31,26 @@ public class CandidatePhotoManager implements CandidatePhotoService {
 		this.imageService = imageService;
 		
 	}
+	
+	@Override
+	public Result add(CandidatePhoto candidatePhoto) {
+		this.candidatePhotoDao.save(candidatePhoto);
+		return new SuccessResult();
+	}
+
 
 	@Override
 	public Result add(CandidatePhoto candidatePhoto, MultipartFile file) {
-		this.candidatePhotoDao.save(candidatePhoto);
-		return new SuccessResult("Photo added");
+		Map<String, String> result = (Map<String, String>) imageService.save(file).getData();
+		String url = result.get("url");
+		candidatePhoto.setUrl(url);
+		return add(candidatePhoto);
 	}
 
 	@Override
 	public DataResult<List<CandidatePhoto>> getAll() {
 		return new SuccessDataResult<List<CandidatePhoto>>(this.candidatePhotoDao.findAll(),"Data Listelendi");
 	}
+
+	
 }
