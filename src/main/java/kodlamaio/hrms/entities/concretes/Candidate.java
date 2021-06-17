@@ -83,22 +83,7 @@ public class Candidate extends Users {
 	
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
-	private List<CoverLetter> coverLetter;
-	
-
-	@OneToMany(mappedBy = "candidate")
-	@JsonIgnore()
-	private List<CandidatePhoto> candidatePhotos;
-
-	
-	/* @OneToOne(mappedBy = "candidate",optional= false, fetch = FetchType.LAZY)
-	 private CandidatePhoto image;*/
-	
-	/*@OneToMany(fetch = FetchType.LAZY,mappedBy = "candidateId")
-	private List<Image> image;*/
-	
-	
-	    
+	private List<CoverLetter> coverLetter;	    
 	   
 	
 	

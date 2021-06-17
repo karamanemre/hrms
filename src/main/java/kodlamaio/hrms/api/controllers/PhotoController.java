@@ -15,32 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
-import kodlamaio.hrms.business.abstracts.CandidatePhotoService;
+import kodlamaio.hrms.business.abstracts.PhotoService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.entities.concretes.CandidatePhoto;
+import kodlamaio.hrms.entities.concretes.Photo;
+import kodlamaio.hrms.entities.concretes.Users;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/api/image")
-public class CandidatePhotoController {
+public class PhotoController {
 	
-	private CandidatePhotoService candidatePhotoService;
+	private PhotoService candidatePhotoService;
 	
 	@Autowired
-	public CandidatePhotoController(CandidatePhotoService candidatePhotoService) {
+	public PhotoController(PhotoService candidatePhotoService) {
 		super();
 		this.candidatePhotoService = candidatePhotoService;
 	}
 	
 	@PostMapping(value = "/add")
-	public ResponseEntity<?> add(@RequestBody MultipartFile file, @RequestParam int candidateId) {
-		CandidatePhoto candidatePhoto = new CandidatePhoto();
-		Candidate candidate = new Candidate();
-		candidate.setUserId(candidateId);
-		candidatePhoto.setCandidate(candidate);
-		return ResponseEntity.ok(this.candidatePhotoService.add(candidatePhoto, file));
+	public ResponseEntity<?> add(@RequestBody MultipartFile file, @RequestParam int userId) {
+		Photo photo = new Photo();
+		Users users = new Users();
+		users.setUserId(userId);
+		photo.setUsers(users);
+		return ResponseEntity.ok(this.candidatePhotoService.add(photo, file));
 	}
 	
 	@GetMapping("/getall")

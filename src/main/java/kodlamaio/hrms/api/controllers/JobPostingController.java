@@ -93,15 +93,18 @@ public class JobPostingController {
 	}
 	
 	@GetMapping("/getAllByIsConfirmationFalse")
-	public DataResult<List<JobPostings>> getByIsConfirmationFalse() {
-		return this.jobPostingService.getByIsConfirmationFalse();
+	public DataResult<List<JobPostingsDto>> getAllByIsConfirmationFalse() {
+		return this.jobPostingService.getAllByIsConfirmationFalse();
 	}
 	
+
 
 	@PutMapping("isConfirmation")
 	public Result update(@RequestParam int id) {
 		return this.jobPostingService.isConfirmation( id);
 	}
+	
+	
 	
 	
 

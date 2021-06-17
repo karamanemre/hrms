@@ -6,14 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.entities.concretes.CandidatePhoto;
+import kodlamaio.hrms.entities.concretes.Photo;
 import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 
 
 public interface CandidateDao extends JpaRepository<Candidate, Integer>{
 	
 	boolean existsByNationalId(String national_id);
-	CandidatePhoto findByUserId(int id);
+	Photo findByUserId(int id);
 	
 //	@Query("Select new kodlamaio.hrms.entities.dtos.CandidateCvDto(c.firstName,c.lastName,s.schoolNameList.schoolName,"
 //			+ "s.schoollSection.schoolSection,l.languageNameList.languageName,l.languageLevel,je.companyName,je.finishYear,"

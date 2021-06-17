@@ -99,8 +99,8 @@ public class JobPostingManager implements JobPostingService{
 
 
 	@Override
-	public DataResult<List<JobPostings>> getByIsConfirmationFalse() {
-		return new SuccessDataResult<List<JobPostings>>(this.jobPostingDao.getByIsConfirmationFalse(),"Data Listelendi");
+	public DataResult<List<JobPostingsDto>> getAllByIsConfirmationFalse() {
+		return new SuccessDataResult<List<JobPostingsDto>>(this.jobPostingDao.getAllByIsConfirmationFalse(),"Data Listelendi");
 	}
 
 

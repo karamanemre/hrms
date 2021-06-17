@@ -16,7 +16,7 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
-import kodlamaio.hrms.entities.concretes.CandidatePhoto;
+import kodlamaio.hrms.entities.concretes.Photo;
 import kodlamaio.hrms.entities.dtos.CandidateCvDto;
 
 @Service

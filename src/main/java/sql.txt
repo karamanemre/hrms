@@ -48,7 +48,7 @@ CREATE TABLE public.employess
 CREATE TABLE public.image
 (
     id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 3546485 CACHE 1 ),
-    candidate_id integer NOT NULL,
+    user_id integer NOT NULL,
     url character varying NOT NULL,
     PRIMARY KEY (id)
 );
@@ -75,10 +75,11 @@ CREATE TABLE public.job_postings
     is_active boolean NOT NULL,
     min_salary double precision,
     max_salary double precision,
-    application_deadline character varying NOT NULL,
     release_date date NOT NULL,
     workplace character varying,
     type_of_work character varying,
+    is_confirmation boolean,
+    application_deadline character varying NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -214,8 +215,8 @@ ALTER TABLE public.employess
 
 
 ALTER TABLE public.image
-    ADD FOREIGN KEY (candidate_id)
-    REFERENCES public.candidates (user_id)
+    ADD FOREIGN KEY (user_id)
+    REFERENCES public.users (id)
     NOT VALID;
 
 

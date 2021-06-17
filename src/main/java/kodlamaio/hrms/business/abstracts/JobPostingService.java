@@ -21,7 +21,8 @@ public interface JobPostingService {
 	
 	Result isConfirmation(int employerId); 
 	
-	DataResult<List<JobPostings>> getByIsConfirmationFalse();
+	DataResult<List<JobPostingsDto>> getAllByIsConfirmationFalse();
+
 	
 	
 	

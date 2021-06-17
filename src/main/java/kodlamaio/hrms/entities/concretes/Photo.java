@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "image")
-public class CandidatePhoto {
+public class Photo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,21 +33,8 @@ public class CandidatePhoto {
 	private String url;
 	
 	@ManyToOne()
-	@JoinColumn(name = "candidate_id")
+	@JoinColumn(name = "user_id")
 	@JsonIgnore()
-	private Candidate candidate;
-	
-	/*@Column(name = "candidate_id")
-	private int candidateNumber;
-	
-	@JsonIgnore
-	@OneToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
-	@JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	private Candidate candidate;*/
-	
-	/*@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
-	@JsonIgnore
-    private Candidate candidateId;*/
+	private Users users;
 	
 }
