@@ -82,6 +82,11 @@ public class JobPostingController {
 	       return this.jobPostingService.getById(id);
 	    }
 	
+	@GetMapping("/getByIdList")
+	public DataResult<List<JobPostingsDto>> getByIdList(int id) {
+	       return this.jobPostingService.getByIdList(id);
+	    }
+	
 	@GetMapping("/getAllByIsActive")
 	public Result getAllByIsActiveOrderByCreatedDate(boolean isActive ) {
 	       return this.jobPostingService.getAllByIsActive(isActive);

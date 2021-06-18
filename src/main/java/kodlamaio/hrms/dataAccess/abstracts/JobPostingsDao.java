@@ -24,6 +24,9 @@ public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	 @Query("From JobPostings where employer_id=:employerId") 
 	 JobPostings getByEmployer(int employerId);
 	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where e.id=:id ") 
+	 List<JobPostingsDto> getByIdList(int id);
+	 
 	 JobPostings getById(int id);
 	 
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.isConfirmation=false ")

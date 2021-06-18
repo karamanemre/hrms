@@ -20,6 +20,7 @@ import kodlamaio.hrms.business.abstracts.EmployersService;
 import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
+import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.Employers;
 
@@ -46,6 +47,12 @@ public class EmployersController {
 	public Result add(@Valid @RequestBody Employers employers) {
 		return employersService.add(employers);
 	}
+	
+	@GetMapping("/getByUserId")
+	public DataResult<List<Employers>> getByUserId(int id) {
+		return this.employersService.getByUserId(id);
+	}
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

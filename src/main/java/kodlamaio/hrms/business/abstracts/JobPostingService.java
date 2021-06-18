@@ -9,6 +9,7 @@ import kodlamaio.hrms.entities.dtos.JobPostingsDto;
 public interface JobPostingService {
 	Result add(JobPostings jobPostings);
 	JobPostings getById(int id);
+	DataResult<List<JobPostingsDto>> getByIdList(int id);
 	DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineDesc(boolean bool);
 	DataResult<List<JobPostingsDto>> findAllByIsActiveTrueOrderByApplicaitonDeadlineAsc(boolean bool);
 	DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool);

@@ -62,4 +62,9 @@ public class EmployersManager implements EmployersService{
 		return new SuccessResult("Başarıyla Eklendi");
 	}
 
+	@Override
+	public DataResult<List<Employers>> getByUserId(int id) {
+		return new SuccessDataResult<List<Employers>>(this.employersDao.getByUserId(id),"Data Listelendi");
+	}
+
 }
