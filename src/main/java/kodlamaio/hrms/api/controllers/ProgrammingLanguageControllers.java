@@ -22,6 +22,7 @@ import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
+import kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto;
 
 @CrossOrigin
 @RestController
@@ -46,6 +47,11 @@ public class ProgrammingLanguageControllers {
 	@GetMapping("/getAll")
 	public DataResult<List<ProgrammingLanguage>> getAll() {
 		return this.programmingLanguageService.getAll();
+	}
+	
+	@GetMapping("/findByDto")
+	public DataResult<List<ProgrammingLanguageDto>> findByDto(int candidateId) {
+		return this.programmingLanguageService.findByDto(candidateId);
 	}
 	
 	

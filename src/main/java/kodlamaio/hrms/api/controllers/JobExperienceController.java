@@ -49,6 +49,11 @@ public class JobExperienceController {
 		return this.jobExperienceService.getAll();
 	}
 	
+	@GetMapping("/findByCandidateNumber")
+	public DataResult<List<JobExperience>> findByCandidateNumber(int id) {
+		return this.jobExperienceService.findByCandidateNumber(id);
+	}
+	
 	@GetMapping("/getAllOrderByFinishYearDesc")
 	public DataResult<List<JobExperience>> getAllOrderByFinishYearDesc() {
 		return this.jobExperienceService.getAllOrderByFinishYearDesc();

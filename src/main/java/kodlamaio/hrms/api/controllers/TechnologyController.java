@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.axis.types.Language;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -24,6 +23,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.dtos.TechnologyDto;
 
 @CrossOrigin
 @RestController
@@ -49,6 +49,11 @@ public class TechnologyController {
 	@GetMapping("/getAll")
 	public DataResult<List<Technology>> getAll() {
 		return this.technologyService.getAll();
+	}
+	
+	@GetMapping("/findByDto")
+	public DataResult<List<TechnologyDto>> findByDto (int id) {
+		return this.technologyService.findByDto(id);
 	}
 	
 	

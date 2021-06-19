@@ -49,4 +49,11 @@ public class JobExperienceManager implements JobExperienceService {
 		
 	}
 
+
+
+	@Override
+	public DataResult<List<JobExperience>> findByCandidateNumber(int id) {
+		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findByCandidateNumber(id),"Data Listelendi");
+	}
+
 }

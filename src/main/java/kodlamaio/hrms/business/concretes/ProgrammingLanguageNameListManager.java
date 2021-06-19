@@ -36,4 +36,9 @@ public class ProgrammingLanguageNameListManager implements ProgrammingLanguageNa
 		return new SuccessDataResult<List<ProgrammingLanguageNameList>>(this.programmingLanguageNameListDao.findAll(),"Data Listelendi");
 	}
 
+	@Override
+	public DataResult<List<ProgrammingLanguageNameList>> findById(int id) {
+		return new SuccessDataResult<List<ProgrammingLanguageNameList>>(this.programmingLanguageNameListDao.findById(id),"Data Listelendi");
+	}
+
 }

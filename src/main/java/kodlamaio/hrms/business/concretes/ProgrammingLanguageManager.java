@@ -12,6 +12,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.ProgrammingLanguageDao;
 import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
+import kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
@@ -33,6 +34,11 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	@Override
 	public DataResult<List<ProgrammingLanguage>> getAll() {
 		return new SuccessDataResult<List<ProgrammingLanguage>>(this.programmingLanguageDao.findAll(),"Data Listelendi");
+	}
+
+	@Override
+	public DataResult<List<ProgrammingLanguageDto>> findByDto(int id) {
+		return new SuccessDataResult<List<ProgrammingLanguageDto>>(programmingLanguageDao.getAllDto(id),"Data Listelendi");
 	}
 
 }

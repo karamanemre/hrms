@@ -40,4 +40,9 @@ public class SchoolNameListManager implements SchoolNameListService {
 		return new SuccessDataResult<List<SchoolNameList>>(this.schoolNameListDao.findAll(),"Data Listelendi");
 	}
 
+	@Override
+	public DataResult<List<SchoolNameList>> findById(int id) {
+		return new SuccessDataResult<List<SchoolNameList>>(this.schoolNameListDao.findById(id),"Data Listelendi");
+	}
+
 }

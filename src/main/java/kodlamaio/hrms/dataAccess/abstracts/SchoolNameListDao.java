@@ -1,5 +1,7 @@
 package kodlamaio.hrms.dataAccess.abstracts;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import kodlamaio.hrms.entities.concretes.SchoolNameList;
@@ -7,5 +9,8 @@ import kodlamaio.hrms.entities.concretes.SchoolNameList;
 public interface SchoolNameListDao extends JpaRepository<SchoolNameList, Integer> {
 	
 	boolean existsBySchoolName(String schoolName);
+	
+	
+	List<SchoolNameList> findById(int id);
 	
 }

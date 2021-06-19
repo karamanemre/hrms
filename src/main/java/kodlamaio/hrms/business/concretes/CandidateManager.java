@@ -28,8 +28,8 @@ public class CandidateManager implements CandidateService{
 	private VerifyCodeService verifyCodeService;
 	
 	@Autowired
-	public CandidateManager(CandidateDao jobSeekersDao,UserDao userDao,CustomerCheckService<Candidate> customerCheckService, VerifyCodeService verifyCodeService) {
-		this.candidateDao=jobSeekersDao;
+	public CandidateManager(CandidateDao candidateDao,UserDao userDao,CustomerCheckService<Candidate> customerCheckService, VerifyCodeService verifyCodeService) {
+		this.candidateDao=candidateDao;
 		this.userDao=userDao;
 		this.customerCheckService=customerCheckService;
 		this.verifyCodeService=verifyCodeService;
@@ -72,11 +72,12 @@ public class CandidateManager implements CandidateService{
 		
 	}
 
-	
-
 	@Override
-	public DataResult<List<CandidateCvDto>> getAllCv() {
-		return new SuccessDataResult<List<CandidateCvDto>>(this.candidateDao.getAllCv(),"Data Listelendi");
+	public DataResult<List<Candidate>> findById(int id) {
+		
+		return new SuccessDataResult<List<Candidate>>(this.candidateDao.findById(id),"Data Listelendi");
 	}
+
+	
 
 }

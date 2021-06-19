@@ -35,7 +35,7 @@ public class SchoolSection {
 	
 	@NotBlank(message="Boş Geçilemez")
 	@Column(name = "section_name")
-	private String schoolSection;
+	private String section;
 	
 	@OneToMany(mappedBy = "schoolSectionId")
 	private List<School> schools;

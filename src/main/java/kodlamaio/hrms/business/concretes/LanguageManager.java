@@ -19,6 +19,7 @@ import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.dataAccess.abstracts.LanguagesDao;
 import kodlamaio.hrms.entities.concretes.Languages;
+import kodlamaio.hrms.entities.dtos.LanguageDto;
 
 
 
@@ -47,6 +48,11 @@ public class LanguageManager implements Languageservice{
 	@Override
 	public DataResult<List<Languages>> getAll() {
 		return new SuccessDataResult<List<Languages>>(this.languagesDao.findAll(),"Data Listelendi");
+	}
+
+	@Override
+	public DataResult<List<LanguageDto>> findByCandidateNumberDto(int candidateNumber) {
+		return new SuccessDataResult<List<LanguageDto>>(languagesDao.findByCandidateNumberDto(candidateNumber),"Data Listelendi");
 	}
 
 	

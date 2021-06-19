@@ -51,7 +51,7 @@ public class JobExperience {
 	private Date startingYear;
 	
 	@Column(name = "finish_year")
-	private Date finishYear;
+	private String finishYear;
 	
 	@NotNull
 	@Column(name = "candidate_id")
@@ -59,6 +59,7 @@ public class JobExperience {
 	
 	@ManyToOne(targetEntity = Candidate.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "candidate_id",insertable = false, updatable = false)
+	@JsonIgnore
     private Candidate candidateId;
 	
 }

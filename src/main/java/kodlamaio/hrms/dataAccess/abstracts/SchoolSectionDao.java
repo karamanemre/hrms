@@ -6,6 +6,6 @@ import kodlamaio.hrms.entities.concretes.SchoolSection;
 
 public interface SchoolSectionDao extends JpaRepository<SchoolSection, Integer>{
 	
-	boolean existsBySchoolSection(String schoolSection);
+	boolean existsBySection(String schoolSection);
 	
 }

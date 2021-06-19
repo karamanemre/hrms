@@ -25,6 +25,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.Languages;
+import kodlamaio.hrms.entities.dtos.LanguageDto;
 
 @CrossOrigin
 @RestController
@@ -49,6 +50,11 @@ public class LanguageController {
 	@GetMapping("/getAll")
 	public DataResult<List<Languages>> getAll() {
 		return this.languageservice.getAll();
+	}
+	
+	@GetMapping("/findByCandidateNumberDto")
+	public DataResult<List<LanguageDto>> findByCandidateNumberDto(int candidateNumber) {
+		return this.languageservice.findByCandidateNumberDto(candidateNumber);
 	}
 	
 

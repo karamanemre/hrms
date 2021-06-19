@@ -46,11 +46,11 @@ public class CandidateController {
 		return ResponseEntity.ok(this.candidateService.getAll()); 
 	}
 	
-//	@GetMapping("/getallcv")
-//	public DataResult<List<CandidateCvDto>> getAllCv(){
-//		return this.candidateService.getAllCv();
-//	}
-//	
+
+	@GetMapping("/findById")
+	public ResponseEntity<?> findById(int id){
+		return ResponseEntity.ok(this.candidateService.findById(id)); 
+	}
 	
 	
 	@PostMapping("/add")

@@ -11,5 +11,8 @@ public interface ProgrammingLanguageNameListService {
 	
 	Result add(ProgrammingLanguageNameList programmingLanguageNameList);
 	DataResult<List<ProgrammingLanguageNameList>> getAll();
+	DataResult<List<ProgrammingLanguageNameList>> findById(int id);
+	
+	
 	
 }

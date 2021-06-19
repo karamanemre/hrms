@@ -44,6 +44,11 @@ public class SocialMediaControllers {
 		return this.socialMediaService.getAll();
 	}
 	
+	@GetMapping("findByCandidateNumber")
+	public Result findByCandidateNumber(int id) {
+		return this.socialMediaService.findByCandidateNumber(id);
+	}
+	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

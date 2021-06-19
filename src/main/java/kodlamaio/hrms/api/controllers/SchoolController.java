@@ -52,6 +52,11 @@ public class SchoolController {
 		return this.schoolService.getAll();
 	}
 	
+	@GetMapping("/finById")
+	public DataResult<List<School>> finById(int candidateNumber) {
+		return this.schoolService.findById(candidateNumber);
+	}
+	
 	@GetMapping("/getAllOrderByFinishYear")
 	public DataResult<List<School>> getAllOrderByFinishYear() {
 		return this.schoolService.getAllOrderByFinishYear();

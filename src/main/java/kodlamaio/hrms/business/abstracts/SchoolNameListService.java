@@ -11,4 +11,5 @@ public interface SchoolNameListService {
 	Result add(SchoolNameList schoolNameList);
 	DataResult<List<SchoolNameList>> getAll();
 	
+    DataResult<List<SchoolNameList>> findById(int id);	
 }

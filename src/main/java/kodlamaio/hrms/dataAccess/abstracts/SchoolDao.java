@@ -11,5 +11,8 @@ public interface SchoolDao extends JpaRepository<School, Integer>{
 	
 	@Query("From School order by finishYear desc")
 	List<School> getOrderByFinishYear();
+	
+	@Query("From School where candidateNumber=:candidateNumber")
+	List<School> findById(int candidateNumber);
 
 }

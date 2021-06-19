@@ -13,4 +13,6 @@ public interface JobExperienceDao extends JpaRepository<JobExperience, Integer>{
 	@Query("From JobExperience order by finishYear desc")
 	List<JobExperience> getOrderByFinishYearDesc();
 	
+	List<JobExperience> findByCandidateNumber(int id);
+	
 }

@@ -33,4 +33,9 @@ public class SocialMediaManager implements SocialMediaService {
 		return new SuccessDataResult<List<SocialMedia>>(this.socialMedia.findAll(),"Data Listelendi");
 	}
 
+	@Override
+	public DataResult<List<SocialMedia>> findByCandidateNumber(int id) {
+		return new SuccessDataResult<List<SocialMedia>>(this.socialMedia.findByCandidateNumber(id),"Data Listelendi");
+	}
+
 }

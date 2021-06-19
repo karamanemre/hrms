@@ -9,4 +9,6 @@ import kodlamaio.hrms.entities.concretes.SocialMedia;
 public interface SocialMediaService {
 	Result add(SocialMedia socialMedia);
 	DataResult<List<SocialMedia>> getAll();
+	
+	DataResult<List<SocialMedia>> findByCandidateNumber(int id);
 }

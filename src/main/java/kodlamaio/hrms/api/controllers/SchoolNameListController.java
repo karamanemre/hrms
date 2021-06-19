@@ -48,6 +48,12 @@ public class SchoolNameListController {
 		return this.schoolNameListService.getAll();
 	}
 	
+
+	@GetMapping("/findById")
+	public DataResult<List<SchoolNameList>> findById(int id) {
+		return this.schoolNameListService.findById(id);
+	}
+	
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)

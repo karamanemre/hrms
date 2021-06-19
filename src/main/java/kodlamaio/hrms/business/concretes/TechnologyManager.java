@@ -14,6 +14,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.TechnologyDao;
 import kodlamaio.hrms.entities.concretes.Technology;
+import kodlamaio.hrms.entities.dtos.TechnologyDto;
 
 @Service
 public class TechnologyManager implements TechnologyService{
@@ -38,6 +39,11 @@ public class TechnologyManager implements TechnologyService{
 	@Override
 	public DataResult<List<Technology>> getAll() {
 		return new SuccessDataResult<List<Technology>>(this.technologyDao.findAll());
+	}
+
+	@Override
+	public DataResult<List<TechnologyDto>> findByDto(int id) {
+		return new SuccessDataResult<List<TechnologyDto>>(this.technologyDao.getAllDto(id));
 	}
 	
 	

@@ -38,14 +38,19 @@ public class ProgramminglanguageNameListControllers {
 		this.validationException=validationException;
 	}
 	
-	@PostMapping("/api/add")
+	@PostMapping("/add")
 	public Result add(@Valid @RequestBody ProgrammingLanguageNameList programmingLanguageNameList) {
 		return this.programmingLanguageNameListService.add(programmingLanguageNameList);
 	}
 	
-	@GetMapping("/api/getAll")
+	@GetMapping("/getAll")
 	public DataResult<List<ProgrammingLanguageNameList>> getAll() {
 		return this.programmingLanguageNameListService.getAll();
+	}
+	
+	@GetMapping("/findById")
+	public DataResult<List<ProgrammingLanguageNameList>> findById(int id) {
+		return this.programmingLanguageNameListService.findById(id);
 	}
 	
 	
