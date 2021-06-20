@@ -34,17 +34,17 @@ public class SocialMediaControllers {
 		this.validationException=validationException;
 	}
 	
-	@PostMapping("add")
+	@PostMapping("/add")
 	public Result add(@Valid @RequestBody SocialMedia socialMedia) {
 		return this.socialMediaService.add(socialMedia);
 	}
 	
-	@GetMapping("getAll")
+	@GetMapping("/getAll")
 	public Result getAll() {
 		return this.socialMediaService.getAll();
 	}
 	
-	@GetMapping("findByCandidateNumber")
+	@GetMapping("/findByCandidateNumber")
 	public Result findByCandidateNumber(int id) {
 		return this.socialMediaService.findByCandidateNumber(id);
 	}
