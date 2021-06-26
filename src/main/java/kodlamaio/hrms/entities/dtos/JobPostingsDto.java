@@ -20,8 +20,8 @@ public class JobPostingsDto {
 	private LocalDate releaseDate;
 	private String description;
 	private boolean isConfirmation;
-	private String workplace;
-	private String typeOfWork;
+	private int workplace;
+	private int typeOfWork;
 	private String city;
 	private double minSalary;
 	private double maxSalary;

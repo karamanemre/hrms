@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.CoverLetter;
 import kodlamaio.hrms.entities.concretes.JobExperience;
 
 @CrossOrigin
@@ -57,6 +60,16 @@ public class JobExperienceController {
 	@GetMapping("/getAllOrderByFinishYearDesc")
 	public DataResult<List<JobExperience>> getAllOrderByFinishYearDesc() {
 		return this.jobExperienceService.getAllOrderByFinishYearDesc();
+	}
+	
+	@GetMapping("getById")
+	public JobExperience getById(int id){
+		return this.jobExperienceService.getById(id);
+	}
+	
+	@PutMapping("uptadejobExperience")
+	public Result uptadeCoverLetter(@RequestParam int id , @RequestBody JobExperience jobExperience) {
+		return this.jobExperienceService.uptadeJobExperience(id,jobExperience);
 	}
 	
 	

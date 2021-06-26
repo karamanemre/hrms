@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
 import kodlamaio.hrms.entities.concretes.School;
 import kodlamaio.hrms.entities.concretes.Technology;
 
@@ -60,6 +63,16 @@ public class SchoolController {
 	@GetMapping("/getAllOrderByFinishYear")
 	public DataResult<List<School>> getAllOrderByFinishYear() {
 		return this.schoolService.getAllOrderByFinishYear();
+	}
+	
+	@GetMapping("/getById")
+	public School getById(int id) {
+		return this.schoolService.getById(id);
+	}
+	
+	@PutMapping("uptadeschool")
+	public Result uptadeSchool(@RequestParam int id , @RequestBody School school) {
+		return this.schoolService.uptadeScholl(id,school);
 	}
 	
 	

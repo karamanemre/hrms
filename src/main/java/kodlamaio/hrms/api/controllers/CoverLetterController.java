@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,7 @@ import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.entities.concretes.CoverLetter;
+import kodlamaio.hrms.entities.concretes.JobPostings;
 
 @CrossOrigin
 @RestController
@@ -47,6 +50,15 @@ public class CoverLetterController {
 		return this.coverLetterService.getAll();
 	}
 	
+	@GetMapping("getById")
+	public CoverLetter getById(int id){
+		return this.coverLetterService.getById(id);
+	}
+	
+	@PutMapping("uptadeCoverLetter")
+	public Result uptadeCoverLetter(@RequestParam int id , @RequestBody CoverLetter coverLetter) {
+		return this.coverLetterService.uptadeCoverLetter(id,coverLetter);
+	}
 	
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

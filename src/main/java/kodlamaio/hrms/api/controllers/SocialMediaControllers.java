@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +20,9 @@ import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.concretes.SocialMedia;
+import kodlamaio.hrms.entities.dtos.LanguageDto;
 
 @CrossOrigin
 @RestController
@@ -47,6 +51,16 @@ public class SocialMediaControllers {
 	@GetMapping("/findByCandidateNumber")
 	public Result findByCandidateNumber(int id) {
 		return this.socialMediaService.findByCandidateNumber(id);
+	}
+	
+	@GetMapping("/getById")
+	public SocialMedia getById(int id) {
+		return this.socialMediaService.getById(id);
+	}
+	
+	@PutMapping("uptadesocialmedia")
+	public Result uptadeSocialMedia(@RequestParam int id , @RequestBody SocialMedia socialMedia) {
+		return this.socialMediaService.uptadeSocialMedia(id,socialMedia);
 	}
 	
 	

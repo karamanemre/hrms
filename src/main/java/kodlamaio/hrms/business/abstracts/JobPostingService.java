@@ -15,6 +15,9 @@ public interface JobPostingService {
 	DataResult<List<JobPostingsDto>> getByIsActiveAndEmployer(String companyName,boolean bool);
 	Result toggleActiveStatus(int id);
 	DataResult<List<JobPostingsDto>> getAll();
+	DataResult<List<JobPostingsDto>> getAll(int pageNo,int pageSize);
+	
+	DataResult<List<JobPostingsDto>> getByIdDto(int id);
 	
 	DataResult<List<JobPostingsDto>> getAllByIsActive(boolean isActive );
 	
@@ -23,7 +26,15 @@ public interface JobPostingService {
 	Result isConfirmation(int employerId); 
 	
 	DataResult<List<JobPostingsDto>> getAllByIsConfirmationFalse();
-
+	
+	Result uptade(JobPostings jobPostings);
+	
+	DataResult<List<JobPostingsDto>> filterWorkplace(int id);
+	DataResult<List<JobPostingsDto>> filterTypeOfWork(int id);
+	
+	DataResult<List<JobPostingsDto>> filterCity(int cities);
+	
+//	DataResult<List<JobPostingsDto>> findByCitiesName(String cities);	
 	
 	
 	

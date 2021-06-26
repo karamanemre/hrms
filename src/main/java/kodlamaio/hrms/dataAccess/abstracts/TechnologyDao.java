@@ -13,8 +13,16 @@ public interface TechnologyDao extends JpaRepository<Technology, Integer> {
 	
 	boolean existsByTechnologyIdAndCandidateNumber(int technologyId,int cvId);
 	
-	 @Query("Select new kodlamaio.hrms.entities.dtos.TechnologyDto(t.candidateNumber,tnl.name)"
+	 @Query("Select new kodlamaio.hrms.entities.dtos.TechnologyDto(t.id,t.candidateNumber,tnl.name)"
 		 		+ " From Technology t Inner Join "
 		 		+ "t.technologyNameList tnl where t.candidateNumber=:id")
 		List<TechnologyDto> getAllDto(int id); 
+	 
+	 Technology getById(int id);
+	 
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.TechnologyDto(t.id,t.candidateNumber,tnl.name)"
+		 		+ " From Technology t Inner Join "
+		 		+ "t.technologyNameList tnl where t.id=:id")
+	 TechnologyDto getByIdDto(int id);
 }

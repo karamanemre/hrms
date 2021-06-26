@@ -59,16 +59,16 @@ public class JobPostings {
 	@Column(name = "is_active")
 	private boolean isActive=true;
 	
-	@NotBlank(message = "Çalışma Yeri Alanı Boş Bırakılamaz")
+	@NotNull
 	@Column(name = "workplace")
-	private String workplace;
+	private int workplace;
 	
 	@JsonIgnore
 	@Column(name = "is_confirmation")
 	private boolean isConfirmation=false;
 	
 	@Column(name = "type_of_work")
-	private String typeOfWork;
+	private int typeOfWork;
 	
 	@Column(name = "release_date", columnDefinition = "Date default CURRENT_DATE")
 	@JsonIgnore

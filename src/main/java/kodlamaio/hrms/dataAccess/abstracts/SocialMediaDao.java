@@ -9,5 +9,7 @@ import kodlamaio.hrms.entities.concretes.SocialMedia;
 public interface SocialMediaDao extends JpaRepository<SocialMedia, Integer>{
 	
 	List<SocialMedia> findByCandidateNumber(int id);
+	
+	SocialMedia getById(int id);
 
 }

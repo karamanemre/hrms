@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.JobExperience;
 import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.dtos.LanguageDto;
 
@@ -57,6 +60,15 @@ public class LanguageController {
 		return this.languageservice.findByCandidateNumberDto(candidateNumber);
 	}
 	
+	@GetMapping("/getByIdDto")
+	public LanguageDto getById(int id) {
+		return this.languageservice.getByIdDto(id);
+	}
+	
+	@PutMapping("uptadelanguage")
+	public Result jobExperience(@RequestParam int id , @RequestBody Languages languages) {
+		return this.languageservice.uptadeLanguage(id,languages);
+	}
 
 	
 	

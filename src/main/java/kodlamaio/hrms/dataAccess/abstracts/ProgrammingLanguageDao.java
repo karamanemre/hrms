@@ -10,9 +10,16 @@ import kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto;
 
 public interface ProgrammingLanguageDao extends JpaRepository<ProgrammingLanguage, Integer>{
 	
-	 @Query("Select new kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto(pl.candidateNumber,plnl.programmingLanguageName)"
+	 @Query("Select new kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto(pl.id,pl.candidateNumber,plnl.programmingLanguageName)"
 	 		+ " From ProgrammingLanguage pl Inner Join "
 	 		+ "pl.programmingLanguageNameList plnl where pl.candidateNumber=:id")
 	List<ProgrammingLanguageDto> getAllDto(int id); 
+	 
+	 ProgrammingLanguage getById(int id);
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto(pl.id,pl.candidateNumber,plnl.programmingLanguageName)"
+		 		+ " From ProgrammingLanguage pl Inner Join "
+		 		+ "pl.programmingLanguageNameList plnl where pl.id=:id")
+	 ProgrammingLanguageDto getByIdDto(int id);
  
 }

@@ -11,4 +11,6 @@ public interface SchoolService {
 	DataResult<List<School>> getAll();
 	DataResult<List<School>> getAllOrderByFinishYear();
 	DataResult<List<School>> findById(int candidateNumber);
+	School getById(int id);
+	Result uptadeScholl(int id,School school);
 }

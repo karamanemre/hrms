@@ -18,6 +18,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.core.validationException.ValidationException;
 import kodlamaio.hrms.dataAccess.abstracts.LanguagesDao;
+import kodlamaio.hrms.entities.concretes.JobExperience;
 import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.dtos.LanguageDto;
 
@@ -53,6 +54,25 @@ public class LanguageManager implements Languageservice{
 	@Override
 	public DataResult<List<LanguageDto>> findByCandidateNumberDto(int candidateNumber) {
 		return new SuccessDataResult<List<LanguageDto>>(languagesDao.findByCandidateNumberDto(candidateNumber),"Data Listelendi");
+	}
+
+	@Override
+	public Languages getById(int id) {
+		return this.languagesDao.getById(id);
+	}
+	
+	@Override
+	public LanguageDto getByIdDto(int id) {
+		return this.languagesDao.getByIdDto(id);
+	}
+
+	@Override
+	public Result uptadeLanguage(int id, Languages languages) {
+		Languages languagesId = languagesDao.getById(id);
+		languagesId=languages;
+		languagesId.setId(id);
+		this.languagesDao.save(languagesId);
+		return new SuccessResult("Güncellendi");
 	}
 
 	

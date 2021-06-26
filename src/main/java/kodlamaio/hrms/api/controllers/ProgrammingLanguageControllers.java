@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +23,7 @@ import kodlamaio.hrms.core.utilities.DataResult;
 import kodlamaio.hrms.core.utilities.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.validationException.ValidationException;
+import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
 import kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto;
 
@@ -47,6 +50,21 @@ public class ProgrammingLanguageControllers {
 	@GetMapping("/getAll")
 	public DataResult<List<ProgrammingLanguage>> getAll() {
 		return this.programmingLanguageService.getAll();
+	}
+	
+	@GetMapping("/getById")
+	public ProgrammingLanguage getById(int id) {
+		return this.programmingLanguageService.getById(id);
+	}
+	
+	@GetMapping("/getByIdDto")
+	public ProgrammingLanguageDto getByIdDto(int id) {
+		return this.programmingLanguageService.getByIdDto(id);
+	}
+	
+	@PutMapping("uptadeprogramminglanguage")
+	public Result uptadeProgrammingLanguage(@RequestParam int id , @RequestBody ProgrammingLanguage programmingLanguage) {
+		return this.programmingLanguageService.uptadeProgrammingLanguage(id,programmingLanguage);
 	}
 	
 	@GetMapping("/findByDto")

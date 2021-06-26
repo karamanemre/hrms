@@ -12,6 +12,7 @@ import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.SchoolDao;
 import kodlamaio.hrms.dataAccess.abstracts.TechnologyDao;
+import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.concretes.School;
 import kodlamaio.hrms.entities.concretes.Technology;
 
@@ -47,6 +48,20 @@ public class SchoolManager implements SchoolService{
 	@Override
 	public DataResult<List<School>> findById(int candidateNumber) {
 		return new SuccessDataResult<List<School>>(this.schoolDao.findById(candidateNumber),"Data Listelendi");
+	}
+
+	@Override
+	public Result uptadeScholl(int id, School school) {
+		School schoolId = schoolDao.getById(id);
+		schoolId=school;
+		schoolId.setId(id);
+		this.schoolDao.save(schoolId);
+		return new SuccessResult("Güncellendi");
+	}
+
+	@Override
+	public School getById(int id) {
+		return this.schoolDao.getById(id);
 	}
 
 }

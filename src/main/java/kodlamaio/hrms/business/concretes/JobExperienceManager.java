@@ -11,6 +11,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobExperienceDao;
+import kodlamaio.hrms.entities.concretes.CoverLetter;
 import kodlamaio.hrms.entities.concretes.JobExperience;
 
 @Service
@@ -54,6 +55,24 @@ public class JobExperienceManager implements JobExperienceService {
 	@Override
 	public DataResult<List<JobExperience>> findByCandidateNumber(int id) {
 		return new SuccessDataResult<List<JobExperience>>(this.jobExperienceDao.findByCandidateNumber(id),"Data Listelendi");
+	}
+
+
+
+	@Override
+	public JobExperience getById(int id) {
+		return this.jobExperienceDao.getById(id);
+	}
+
+
+
+	@Override
+	public Result uptadeJobExperience(int id, JobExperience jobExperience) {
+		JobExperience jobExperienceId = jobExperienceDao.getById(id);
+		jobExperienceId=jobExperience;
+		jobExperienceId.setId(id);
+		this.jobExperienceDao.save(jobExperienceId);
+		return new SuccessResult("Güncellendi");
 	}
 
 }

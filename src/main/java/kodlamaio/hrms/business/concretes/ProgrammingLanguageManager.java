@@ -11,6 +11,7 @@ import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.core.utilities.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.ProgrammingLanguageDao;
+import kodlamaio.hrms.entities.concretes.Languages;
 import kodlamaio.hrms.entities.concretes.ProgrammingLanguage;
 import kodlamaio.hrms.entities.dtos.ProgrammingLanguageDto;
 
@@ -39,6 +40,25 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	@Override
 	public DataResult<List<ProgrammingLanguageDto>> findByDto(int id) {
 		return new SuccessDataResult<List<ProgrammingLanguageDto>>(programmingLanguageDao.getAllDto(id),"Data Listelendi");
+	}
+
+	@Override
+	public Result uptadeProgrammingLanguage(int id, ProgrammingLanguage programmingLanguage) {
+		ProgrammingLanguage programmingLanguageId = programmingLanguageDao.getById(id);
+		programmingLanguageId=programmingLanguage;
+		programmingLanguageId.setId(id);
+		this.programmingLanguageDao.save(programmingLanguageId);
+		return new SuccessResult("Güncellendi");
+	}
+
+	@Override
+	public ProgrammingLanguage getById(int id) {
+		return this.programmingLanguageDao.getById(id);
+	}
+
+	@Override
+	public ProgrammingLanguageDto getByIdDto(int id) {
+		return this.programmingLanguageDao.getByIdDto(id);
 	}
 
 }

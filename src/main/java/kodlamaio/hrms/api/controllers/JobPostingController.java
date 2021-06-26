@@ -1,5 +1,6 @@
 package kodlamaio.hrms.api.controllers;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -77,9 +78,19 @@ public class JobPostingController {
 	       return this.jobPostingService.getAll();
 	    }
 	
+	@GetMapping("/getAllPageSize")
+	public Result getJobPostingsDtoDetails(int pageNo,int pageSize) {
+	       return this.jobPostingService.getAll(pageNo,pageSize);
+	    }
+	
 	@GetMapping("/getById")
 	public JobPostings getById(int id) {
 	       return this.jobPostingService.getById(id);
+	    }
+	
+	@GetMapping("/getByIdDto")
+	public DataResult<List<JobPostingsDto>> getByIdDto(int id) {
+	       return this.jobPostingService.getByIdDto(id);
 	    }
 	
 	@GetMapping("/getByIdList")
@@ -102,12 +113,34 @@ public class JobPostingController {
 		return this.jobPostingService.getAllByIsConfirmationFalse();
 	}
 	
-
+	@GetMapping("/filterWorkplace")
+	public DataResult<List<JobPostingsDto>> filterWorkplace(int id) {
+		return this.jobPostingService.filterWorkplace(id);
+	}
+	
+	@GetMapping("/filterTypeOfWork")
+	public DataResult<List<JobPostingsDto>> filterTypeOfWork(int id) {
+		return this.jobPostingService.filterTypeOfWork(id);
+	}
+	
+	@GetMapping("/filterCity")
+	public DataResult<List<JobPostingsDto>> filterCity(@RequestParam int cities) {
+		System.out.println(cities);
+		return this.jobPostingService.filterCity(cities);
+	}
+	
+ 
 
 	@PutMapping("isConfirmation")
 	public Result update(@RequestParam int id) {
 		return this.jobPostingService.isConfirmation( id);
 	}
+	
+	@PutMapping("uptadeJobPosting")
+	public Result update(@RequestBody JobPostings jobPostings) {
+		return this.jobPostingService.uptade( jobPostings);
+	}
+	
 	
 	
 	

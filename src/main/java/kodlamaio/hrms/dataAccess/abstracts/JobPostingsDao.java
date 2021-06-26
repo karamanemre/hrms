@@ -2,6 +2,7 @@ package kodlamaio.hrms.dataAccess.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,17 +30,37 @@ public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	 
 	 JobPostings getById(int id);
 	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.id=:id ")
+	 List<JobPostingsDto> getByIdDto(int id);
+	 
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.isConfirmation=false ")
 	 List<JobPostingsDto> getAllByIsConfirmationFalse();
 	 
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jp")
 	 List<JobPostingsDto> getAll();
 	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.employer e Inner Join j.city c Inner Join j.jobPosition jp where j.isConfirmation=true")
+	 List<JobPostingsDto> getAll(Pageable pageable);
+	 
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.isActive=:isActive ")
 	 List<JobPostingsDto> getAllByIsActive(boolean isActive);
 	 
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.isConfirmation=true ")
 	 List<JobPostingsDto> getAllByIsConfirmation();
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.workplace=:id ")
+	 List<JobPostingsDto> filterWorkplace(int id);
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where j.typeOfWork=:id ")
+	 List<JobPostingsDto> filterTypeOfWork(int id);
+	 
+	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where c=:cities ")
+	 List<JobPostingsDto> filterCity(int cities);
+	 
+	 
+	 
+//	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where  j.city=:cities ") 
+//	 List<JobPostingsDto> findByCitiesName(String cities);
 	 
 	 
 	 

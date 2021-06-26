@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProgrammingLanguageDto {
 	
+	private int id;
 	private int candidateNumber;
 	private String programminglanguage;
 
