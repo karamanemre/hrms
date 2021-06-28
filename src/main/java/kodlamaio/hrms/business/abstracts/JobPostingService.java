@@ -32,7 +32,7 @@ public interface JobPostingService {
 	DataResult<List<JobPostingsDto>> filterWorkplace(int id);
 	DataResult<List<JobPostingsDto>> filterTypeOfWork(int id);
 	
-	DataResult<List<JobPostingsDto>> filterCity(int cities);
+	DataResult<List<JobPostingsDto>> filterCity(List<Integer> cities);
 	
 //	DataResult<List<JobPostingsDto>> findByCitiesName(String cities);	
 	

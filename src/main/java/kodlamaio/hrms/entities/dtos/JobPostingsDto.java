@@ -25,6 +25,7 @@ public class JobPostingsDto {
 	private String city;
 	private double minSalary;
 	private double maxSalary;
+	private int cityId;
 	
 
 	

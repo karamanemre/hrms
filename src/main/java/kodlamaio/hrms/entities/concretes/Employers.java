@@ -3,6 +3,7 @@ package kodlamaio.hrms.entities.concretes;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -10,6 +11,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import org.json.JSONObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import springfox.documentation.spring.web.json.Json;
 
 @PrimaryKeyJoinColumn(name = "user_id")
 @Entity
@@ -42,6 +46,11 @@ public class Employers extends Users{
 	@Pattern(regexp ="[0-9\\s]{11}",message = "Hatalı Telefon numarası")
     @Column(name = "phone_number")
     private String phoneNumber;
+	
+	
+//	@Column(name = "updated_information",columnDefinition = "json")
+//	private JSONObject  updatedInformation;
+	
     
 	@JsonIgnore
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "employer")
