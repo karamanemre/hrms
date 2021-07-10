@@ -69,6 +69,18 @@ public class JobExperienceManager implements JobExperienceService {
 	@Override
 	public Result uptadeJobExperience(int id, JobExperience jobExperience) {
 		JobExperience jobExperienceId = jobExperienceDao.getById(id);
+		if (jobExperience.getCompanyName().equals("")) {
+			jobExperience.setCompanyName(jobExperienceId.getCompanyName());
+		}
+		if (jobExperience.getPositionName().equals("")) {
+			jobExperience.setPositionName(jobExperienceId.getPositionName());
+		}
+		if (jobExperience.getStartingYear()==null) {
+			jobExperience.setStartingYear(jobExperienceId.getStartingYear());
+		}
+		if (jobExperience.getFinishYear().equals("")) {
+			jobExperience.setFinishYear(jobExperienceId.getFinishYear());
+		}
 		jobExperienceId=jobExperience;
 		jobExperienceId.setId(id);
 		this.jobExperienceDao.save(jobExperienceId);

@@ -12,6 +12,7 @@ public class LanguageDto {
 	private int id;
 	private int candidateNumber;
 	private String language;
+	private int languageLevel;
 
 
 }

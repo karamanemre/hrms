@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.print.attribute.standard.MediaSize.Other;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -23,6 +24,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import springfox.documentation.spring.web.json.Json;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @PrimaryKeyJoinColumn(name = "user_id")
 @Entity
@@ -32,6 +36,7 @@ import springfox.documentation.spring.web.json.Json;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobPostings"})
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class Employers extends Users{
 	
 	@NotBlank(message = "Şirket İsmi Alanı Boş Olamaz")
@@ -48,8 +53,9 @@ public class Employers extends Users{
     private String phoneNumber;
 	
 	
-//	@Column(name = "updated_information",columnDefinition = "json")
-//	private JSONObject  updatedInformation;
+	@Type(type = "jsonb")
+	@Column(columnDefinition = "jsonb",name = "updated_information")
+	private Employers uptade_information;
 	
     
 	@JsonIgnore

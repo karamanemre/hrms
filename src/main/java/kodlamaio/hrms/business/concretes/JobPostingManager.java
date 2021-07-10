@@ -118,10 +118,41 @@ public class JobPostingManager implements JobPostingService{
 	@Override
 	public Result uptade(JobPostings jobPostings) {
 		JobPostings jobPostingsId = jobPostingDao.getById(jobPostings.getId());
-		jobPostingsId=jobPostings;
-		jobPostingDao.save(jobPostingsId);
-		return new SuccessResult("Güncellendi");
-	}
+		if (jobPostings.getDescription().equals("")) {
+			jobPostings.setDescription(jobPostingsId.getDescription());
+		}
+		if (jobPostings.getNumberOfOpenPosition().equals("")) {
+			jobPostings.setNumberOfOpenPosition(jobPostingsId.getNumberOfOpenPosition());
+		}
+		if (jobPostings.getApplicaitonDeadline().equals("")) {
+			jobPostings.setApplicaitonDeadline(jobPostingsId.getApplicaitonDeadline());
+		}
+		
+//		if (jobPostings.getMinSalary()<5) {
+//		jobPostings.setMinSalary(jobPostingsId.getMinSalary());
+//		}
+//		if (jobPostings.getMaxSalary() == (Integer)null) {
+//			jobPostings.setMaxSalary(jobPostingsId.getMaxSalary());
+//		}
+//		if (jobPostings.getWorkplace() == (Integer)null) {
+//			jobPostings.setWorkplace(jobPostingsId.getWorkplace());
+//			}
+//		if (jobPostings.getTypeOfWork() == (Integer)null) {
+//			jobPostings.setTypeOfWork(jobPostingsId.getTypeOfWork());
+//			}
+//		if (jobPostings.getEmployerId() == (Integer)null) {
+//			jobPostings.setEmployerId(jobPostingsId.getEmployerId());
+//		}
+//		if (jobPostings.getCityId() == (Integer)null) {
+//			jobPostings.setCityId(jobPostingsId.getCityId());
+//		}
+//		if (jobPostings.getJobPositionId() == (Integer)null) {
+//			jobPostings.setJobPositionId(jobPostingsId.getJobPositionId());
+//		}
+			jobPostingsId=jobPostings;
+			jobPostingDao.save(jobPostingsId);
+			return new SuccessResult("Güncellendi");
+		}
 	
 
 	@Override

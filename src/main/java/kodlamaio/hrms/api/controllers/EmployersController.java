@@ -1,5 +1,6 @@
 package kodlamaio.hrms.api.controllers;
 
+import java.io.Console;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,9 +51,26 @@ public class EmployersController {
 		return employersService.add(employers);
 	}
 	
+	@PutMapping("/uptadeEmployers")
+	public Result uptadeEmployers(@RequestBody Employers uptadeInformation) {
+		return employersService.uptadeEmployers(uptadeInformation);
+		
+	}
+	
+	@PutMapping("/updateConfirmation")
+	public Result updateConfirmation(@RequestParam int userId) {
+		return employersService.uptadeConfirmation(userId); 
+		
+	}
+	
 	@GetMapping("/getByUserId")
 	public DataResult<List<Employers>> getByUserId(int id) {
 		return this.employersService.getByUserId(id);
+	}
+	
+	@GetMapping("/getByUptadeConfirmationWait")
+	public DataResult<List<Employers>> getByUptadeConfirmationWait() {
+		return this.employersService.getByUptadeConfirmationWait();
 	}
 	
 	

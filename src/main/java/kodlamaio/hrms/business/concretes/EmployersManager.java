@@ -67,4 +67,49 @@ public class EmployersManager implements EmployersService{
 		return new SuccessDataResult<List<Employers>>(this.employersDao.getByUserId(id),"Data Listelendi");
 	}
 
+	@Override
+	public Result uptadeEmployers(Employers update_information) {
+		Employers employersId = employersDao.getByUserIdEmployers(update_information.getUserId());
+		update_information.setUserId(employersId.getUserId());
+		
+		if (update_information.getCompanyName().equals("")) { 
+			update_information.setCompanyName(employersId.getCompanyName());
+		}
+		if (update_information.getPhoneNumber().equals("")) {
+			update_information.setPhoneNumber(employersId.getPhoneNumber());
+		}
+		if (update_information.getWebSite().equals("")) {
+			update_information.setWebSite(employersId.getWebSite());
+		}
+		if (update_information.getEmail().equals("")) {
+			update_information.setEmail(employersId.getEmail());
+		}
+		if (update_information.getPassword().equals("")) {
+			update_information.setPassword(employersId.getEmail());
+		}
+		employersId.setUptade_information(update_information);
+		this.employersDao.save(employersId);
+		return new SuccessResult("Başarıyla Eklendi");
+	}
+
+	@Override
+	public Result uptadeConfirmation(int userId) {
+		Employers employersId = employersDao.getByUserIdEmployers(userId);
+		employersId.setEmail(employersId.getUptade_information().getEmail());
+		employersId.setPassword(employersId.getUptade_information().getPassword());
+		employersId.setCompanyName(employersId.getUptade_information().getCompanyName());
+		employersId.setPhoneNumber(employersId.getUptade_information().getPhoneNumber());
+		employersId.setWebSite(employersId.getUptade_information().getWebSite());
+		employersId.setUptade_information(null);
+		this.employersDao.save(employersId);
+		return new SuccessResult("Başarıyla Güncellendi");
+	}
+
+	@Override
+	public DataResult<List<Employers>> getByUptadeConfirmationWait() {
+		return new SuccessDataResult<List<Employers>>(this.employersDao.getByUptadeConfirmationWait());
+	}
+	
+	
+
 }

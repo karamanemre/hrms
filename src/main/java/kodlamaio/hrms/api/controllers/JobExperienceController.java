@@ -62,13 +62,15 @@ public class JobExperienceController {
 		return this.jobExperienceService.getAllOrderByFinishYearDesc();
 	}
 	
-	@GetMapping("getById")
+	@GetMapping("/getById")
 	public JobExperience getById(int id){
 		return this.jobExperienceService.getById(id);
 	}
 	
-	@PutMapping("uptadejobExperience")
+	@PutMapping("/uptadejobExperience")
 	public Result uptadeCoverLetter(@RequestParam int id , @RequestBody JobExperience jobExperience) {
+		System.out.println(jobExperience);
+		System.out.println(id);
 		return this.jobExperienceService.uptadeJobExperience(id,jobExperience);
 	}
 	
