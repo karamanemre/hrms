@@ -180,8 +180,8 @@ public class JobPostingManager implements JobPostingService{
  
 
 	@Override
-	public DataResult<List<JobPostingsDto>> filterCity(List<Integer> cities) {
-		return new SuccessDataResult<List<JobPostingsDto>>(jobPostingDao.filterCity(cities),"Data Listelendi");
+	public DataResult<List<JobPostingsDto>> filterCityAndPosition(List<Integer> cities,List<Integer> positions) {
+		return new SuccessDataResult<List<JobPostingsDto>>(jobPostingDao.filterCityAndPosition(cities,positions),"Data Listelendi");
 	}
 
 

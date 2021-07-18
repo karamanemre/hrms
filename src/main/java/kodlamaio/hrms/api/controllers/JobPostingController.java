@@ -123,9 +123,9 @@ public class JobPostingController {
 		return this.jobPostingService.filterTypeOfWork(id);
 	}
 	
-	@GetMapping("/filterCity")
-	public DataResult<List<JobPostingsDto>> filterCity(@RequestParam List<Integer> cities) {
-		return this.jobPostingService.filterCity(cities);
+	@GetMapping("/filterCityAndPosition")
+	public DataResult<List<JobPostingsDto>> filterCityAndPosition(@RequestParam List<Integer> cities,@RequestParam List<Integer> positions) {
+		return this.jobPostingService.filterCityAndPosition(cities,positions);
 	}
 	
  

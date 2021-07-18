@@ -53,6 +53,7 @@ public class SchoolManager implements SchoolService{
 	@Override
 	public Result uptadeScholl(int id, School school) {
 		School schoolId = schoolDao.getById(id);
+		
 		schoolId=school;
 		schoolId.setId(id);
 		this.schoolDao.save(schoolId);
