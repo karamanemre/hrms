@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import kodlamaio.hrms.core.utilities.Result;
 import kodlamaio.hrms.entities.concretes.JobPostings;
 import kodlamaio.hrms.entities.dtos.JobPostingsDto;
+import springfox.documentation.spring.web.json.Json;
 
 public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	
@@ -58,20 +59,9 @@ public interface JobPostingsDao extends JpaRepository<JobPostings, Integer>{
 	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,"
 	 		+ "jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,"
 	 		+ "j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary,c.id,jp.id) From JobPostings j Inner Join j.jobPosition"
-	 		+ " jp Inner Join j.employer e Inner Join j.city c where j.cityId IN :cities and jp.id IN :positions")
-	 List<JobPostingsDto> filterCityAndPosition(List<Integer> cities,List<Integer> positions);
-	 
-	
-	 
-	 
-	 
-	 
-	 
-//	 @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where  j.city=:cities ") 
-//	 List<JobPostingsDto> findByCitiesName(String cities);
-	 
-	 //  @Query("Select new kodlamaio.hrms.entities.dtos.JobPostingsDto(j.id,e.companyName,jp.positionName,j.numberOfOpenPosition,j.applicaitonDeadline,j.releaseDate,j.description,j.isConfirmation,j.workplace,j.typeOfWork,c.city,j.minSalary,j.maxSalary) From JobPostings j Inner Join j.jobPosition jp Inner Join j.employer e Inner Join j.city c where c IN :cities ")
-	 
+	 		+ " jp Inner Join j.employer e Inner Join j.city c where j.cityId IN :cities and jp.id IN :positions and j.typeOfWork IN :typeWork and j.workplace IN :workPlace")
+	 List<JobPostingsDto> filterCityPositionTypeWorkWorkPlace(List<Integer> cities,List<Integer> positions,List<Integer> typeWork,List<Integer> workPlace); 
+
 	 
 	 
 	 

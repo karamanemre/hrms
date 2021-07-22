@@ -180,30 +180,9 @@ public class JobPostingManager implements JobPostingService{
  
 
 	@Override
-	public DataResult<List<JobPostingsDto>> filterCityAndPosition(List<Integer> cities,List<Integer> positions) {
-		return new SuccessDataResult<List<JobPostingsDto>>(jobPostingDao.filterCityAndPosition(cities,positions),"Data Listelendi");
+	public DataResult<List<JobPostingsDto>> filterCityPositionTypeWorkWorkPlace(List<Integer> cities,List<Integer> positions,List<Integer> typeWork,List<Integer> workPlace) {
+		return new SuccessDataResult<List<JobPostingsDto>>(jobPostingDao.filterCityPositionTypeWorkWorkPlace(cities,positions,typeWork,workPlace),"Data Listelendi");
 	}
-
-
-
-
-
-	
-
-
-	
-
-
-//	@Override
-//	public DataResult<List<JobPostingsDto>> findByCitiesName(String cities) {
-//		return new SuccessDataResult<List<JobPostingsDto>>(jobPostingDao.findByCitiesName(cities));
-//	}
-
-
-	
-
-	
-
 
 
 
