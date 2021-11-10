@@ -16,12 +16,15 @@ import kodlamaio.hrms.entities.concretes.JobPostings;
 
 @Service
 public class CoverLetterManager implements CoverLetterService {
+	
 	private CoverLetterDao coverLetterDao;
+	
 	@Autowired
 	public CoverLetterManager(CoverLetterDao coverLetterDao) {
 		super();
 		this.coverLetterDao = coverLetterDao;
 	}
+	
 	@Override
 	public Result add(CoverLetter coverLetter) {
 		this.coverLetterDao.save(coverLetter);
